@@ -28,10 +28,22 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
         main.cpp \
-        mainwindow.cpp
+        mainwindow.cpp \
+    category_mst.cpp \
+    add_cat.cpp \
+    warnline_mst.cpp \
+    add_warn.cpp
 
 HEADERS += \
-        mainwindow.h
+        mainwindow.h \
+    category_mst.h \
+    add_cat.h \
+    warnline_mst.h \
+    add_warn.h
 
 FORMS += \
-        mainwindow.ui
+        mainwindow.ui \
+    category_mst.ui \
+    add_cat.ui \
+    warnline_mst.ui \
+    add_warn.ui
