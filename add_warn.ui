@@ -89,12 +89,44 @@
       </widget>
      </item>
      <item row="2" column="1">
-      <widget class="QComboBox" name="comboBox"/>
+      <widget class="QComboBox" name="comboBox">
+       <item>
+        <property name="text">
+         <string>&lt;Select one&gt;</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Daily</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Monthly</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Yearly</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Lifetime</string>
+        </property>
+       </item>
+      </widget>
      </item>
     </layout>
+    <zorder>lineEdit_2</zorder>
    </widget>
   </widget>
  </widget>
+ <tabstops>
+  <tabstop>lineEdit</tabstop>
+  <tabstop>lineEdit_2</tabstop>
+  <tabstop>comboBox</tabstop>
+ </tabstops>
  <resources/>
  <connections>
   <connection>
