@@ -2,6 +2,7 @@
 #define ADD_CAT_H
 
 #include <QDialog>
+#include <QString>
 
 namespace Ui {
 class add_cat;
@@ -15,8 +16,16 @@ public:
     explicit add_cat(QWidget *parent = 0);
     ~add_cat();
 
+private slots:
+    void on_btn_confirm_clicked();
+
+    void on_btn_cancel_clicked();
+
 private:
     Ui::add_cat *ui;
+
+    //to write new category into category.txt
+    void writeNewCategory(QString);
 };
 
 #endif // ADD_CAT_H

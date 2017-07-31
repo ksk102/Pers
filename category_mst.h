@@ -21,7 +21,7 @@ private slots:
 
 private:
     Ui::Category_mst *ui;
-    add_cat *addcat;
+    add_cat *addCat;
 };
 
 #endif // CATEGORY_MST_H

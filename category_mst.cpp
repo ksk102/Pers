@@ -15,6 +15,6 @@ Category_mst::~Category_mst()
 
 void Category_mst::on_pushButton_clicked()
 {
-    addcat = new add_cat(this);
-    addcat->show();
+    addCat = new add_cat(this);
+    addCat->show();
 }

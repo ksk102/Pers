@@ -24,8 +24,8 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
-    Category_mst *cat_mst;
-    warnLine_mst *warning_mst;
+    Category_mst *categoryMst;
+    warnLine_mst *warnLineMst;
 };
 
 #endif // MAINWINDOW_H

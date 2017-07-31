@@ -21,7 +21,7 @@ private slots:
 
 private:
     Ui::warnLine_mst *ui;
-    add_warn *addwarn;
+    add_warn *addWarn;
 };
 
 #endif // WARNLINE_MST_H

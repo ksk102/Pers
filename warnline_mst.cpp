@@ -15,6 +15,6 @@ warnLine_mst::~warnLine_mst()
 
 void warnLine_mst::on_pushButton_clicked()
 {
-    addwarn = new add_warn(this);
-    addwarn->show();
+    addWarn = new add_warn(this);
+    addWarn->show();
 }
