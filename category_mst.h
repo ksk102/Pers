@@ -17,7 +17,8 @@ public:
     ~Category_mst();
 
 private slots:
-    void on_pushButton_clicked();
+
+    void on_btn_addNew_clicked();
 
 private:
     Ui::Category_mst *ui;

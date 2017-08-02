@@ -1,5 +1,6 @@
 #include "category_mst.h"
 #include "ui_category_mst.h"
+#include <QWidget>
 
 Category_mst::Category_mst(QWidget *parent) :
     QDialog(parent),
@@ -13,7 +14,7 @@ Category_mst::~Category_mst()
     delete ui;
 }
 
-void Category_mst::on_pushButton_clicked()
+void Category_mst::on_btn_addNew_clicked()
 {
     addCat = new add_cat(this);
     addCat->setModal(true);

@@ -2,7 +2,7 @@
 #include "ui_add_cat.h"
 #include <QMessageBox>
 #include <QFile>
-#include <QDebug>
+#include <QTextStream>
 
 add_cat::add_cat(QWidget *parent) :
     QDialog(parent),

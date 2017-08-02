@@ -13,7 +13,7 @@
   <property name="windowTitle">
    <string>Category Listing - Pers</string>
   </property>
-  <widget class="QGroupBox" name="groupBox">
+  <widget class="QGroupBox" name="gb_searchCat">
    <property name="geometry">
     <rect>
      <x>10</x>
@@ -25,7 +25,7 @@
    <property name="title">
     <string>Search Category</string>
    </property>
-   <widget class="QPushButton" name="pushButton_2">
+   <widget class="QPushButton" name="btn_search">
     <property name="geometry">
      <rect>
       <x>460</x>
@@ -38,7 +38,7 @@
      <string>Search</string>
     </property>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -49,7 +49,7 @@
     </property>
     <layout class="QGridLayout" name="gridLayout">
      <item row="0" column="0">
-      <widget class="QLabel" name="label">
+      <widget class="QLabel" name="lbl_name">
        <property name="font">
         <font>
          <pointsize>8</pointsize>
@@ -61,12 +61,12 @@
       </widget>
      </item>
      <item row="0" column="1">
-      <widget class="QLineEdit" name="lineEdit"/>
+      <widget class="QLineEdit" name="txt_name"/>
      </item>
     </layout>
    </widget>
   </widget>
-  <widget class="QGroupBox" name="groupBox_2">
+  <widget class="QGroupBox" name="gb_catList">
    <property name="geometry">
     <rect>
      <x>10</x>
@@ -78,7 +78,7 @@
    <property name="title">
     <string>Category Listing</string>
    </property>
-   <widget class="QTableView" name="tableView">
+   <widget class="QTableView" name="tv_catListing">
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -88,7 +88,7 @@
      </rect>
     </property>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -99,14 +99,14 @@
     </property>
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
-      <widget class="QPushButton" name="pushButton">
+      <widget class="QPushButton" name="btn_addNew">
        <property name="text">
         <string>Add New</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="pushButton_3">
+      <widget class="QPushButton" name="btn_refresh">
        <property name="text">
         <string>Refresh</string>
        </property>

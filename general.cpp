@@ -41,8 +41,10 @@ int general::checkDataExist(QString userinput, QString filename){
        line = line.toUpper();
 
        if(line == userinput){
+           file.close();
            return 1; //data already exists
        }
     }
+    file.close();
     return 0; //no error
 }
