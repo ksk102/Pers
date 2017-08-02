@@ -19,21 +19,43 @@ add_cat::~add_cat()
 void add_cat::on_btn_confirm_clicked()
 {
     QString catName = ui->txt_catName->text();
-
-    if(catName == ""){
-        QMessageBox::warning(this,"Unsucessful","Please enter a new category to add into system");
-
-        ui->txt_catName->setFocus();
-    }
-    else{
-        writeNewCategory(catName);
-        this->close();
-    }
+    checkUserInput(catName);
 }
 
 void add_cat::on_btn_cancel_clicked()
 {
     this->close();
+}
+
+void add_cat::checkUserInput(QString userinput){
+
+    gen = new general();
+    QString filename = "category.txt";
+    int data_exists = gen->checkDataExist(userinput,filename);
+
+    if(userinput == ""){
+        QMessageBox::warning(this,"Unsucessful","Please enter a new category to add into system");
+
+        ui->txt_catName->setFocus();
+    }
+    else if(gen->checkInvalidString(userinput)){
+        QMessageBox::warning(this,"Unsucessful","Invalid symbol \"|||\"");
+        ui->txt_catName->setText("");
+    }
+    else if(data_exists != 0){
+
+        if(data_exists == 1){
+            QMessageBox::warning(this,"Unsucessful",userinput+" is already exist");
+            ui->txt_catName->setText("");
+        }
+        else if(data_exists == 2){
+            QMessageBox::critical(this,"Unsucessful","Couldn't open the file");
+        }
+    }
+    else{
+        writeNewCategory(userinput);
+        this->close();
+    }
 }
 
 void add_cat::writeNewCategory(QString catName)
@@ -56,5 +78,5 @@ void add_cat::writeNewCategory(QString catName)
     file.close();
 
     //show sucessful alert box
-    QMessageBox::information(this,"Sucessful","\""+catName+"\" have been sucessfully added into system.");
+    QMessageBox::information(this,"Sucessful","\""+catName+"\" has been sucessfully added into system.");
 }
