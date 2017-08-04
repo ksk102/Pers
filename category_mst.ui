@@ -78,7 +78,10 @@
    <property name="title">
     <string>Category Listing</string>
    </property>
-   <widget class="QTableView" name="tv_catListing">
+   <widget class="QTreeWidget" name="tw_catList">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -87,13 +90,36 @@
       <height>301</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <weight>50</weight>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="indentation">
+     <number>10</number>
+    </property>
+    <column>
+     <property name="text">
+      <string>1</string>
+     </property>
+     <property name="toolTip">
+      <string/>
+     </property>
+     <property name="font">
+      <font>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+    </column>
    </widget>
-   <widget class="QWidget" name="layoutWidget">
+   <widget class="QWidget" name="">
     <property name="geometry">
      <rect>
-      <x>10</x>
+      <x>9</x>
       <y>30</y>
-      <width>158</width>
+      <width>239</width>
       <height>25</height>
      </rect>
     </property>
@@ -106,9 +132,16 @@
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="btn_refresh">
+      <widget class="QPushButton" name="btn_edit">
        <property name="text">
-        <string>Refresh</string>
+        <string>Edit</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btn_delete">
+       <property name="text">
+        <string>Delete</string>
        </property>
       </widget>
      </item>
@@ -116,6 +149,14 @@
    </widget>
   </widget>
  </widget>
+ <tabstops>
+  <tabstop>txt_name</tabstop>
+  <tabstop>btn_search</tabstop>
+  <tabstop>btn_addNew</tabstop>
+  <tabstop>btn_edit</tabstop>
+  <tabstop>btn_delete</tabstop>
+  <tabstop>tw_catList</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

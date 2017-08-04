@@ -26,9 +26,7 @@ private:
     Ui::add_cat *ui;
     general *gen;
 
-    void checkUserInput(QString); //check the user input before add it into system
     void writeNewCategory(QString); //to write new category into category.txt
-    int checkDataExist(QString); //check if user input already exists
 };
 
 #endif // ADD_CAT_H
