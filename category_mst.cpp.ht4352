@@ -68,15 +68,11 @@ void Category_mst::on_btn_edit_clicked()
 {
     int currentRow = ui->tw_catList->currentIndex().row(); //user selected row
 
-    //if user click edit button, but didnt select any row
-    if(currentRow == -1){
-        QMessageBox::information(this,"Error","Please select the record that you wish to edit");
-        return;
-    }
+    qDebug("%d", currentRow);
 
     editCat = new edit_cat(this);
-    editCat->retrieveRecord(currentRow);
     editCat->setModal(true);
+    editCat->setSelectedRow(currentRow);
     editCat->exec();
 
     ui->tw_catList->clear(); //clear the listing

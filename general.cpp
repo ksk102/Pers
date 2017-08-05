@@ -13,9 +13,9 @@ bool general::checkInvalidString(QString userinput){
 
 }
 
-int general::checkUserInput(QString filename, QString userinput)
+int general::checkUserInput(QString filename, QString userinput, int currentRow)
 {
-    int data_exists = checkDataExist(userinput,filename);
+    int data_exists = checkDataExist(userinput,filename,currentRow);
 
     if(userinput == ""){
         return 3;
@@ -31,7 +31,7 @@ int general::checkUserInput(QString filename, QString userinput)
     }
 }
 
-int general::checkDataExist(QString userinput, QString filename){
+int general::checkDataExist(QString userinput, QString filename, int selectedRow){
 
     //open file
     QFile file(filename);
@@ -52,15 +52,19 @@ int general::checkDataExist(QString userinput, QString filename){
     QString line;
 
     userinput = userinput.toUpper();
+    int counter = 0;
 
     while (!in.atEnd()) {
        line = in.readLine();
        line = line.toUpper();
 
-       if(line == userinput){
+       //if the userinput is same as one of the record in the file
+       //AND that record is not the field user currently editing
+       if(line == userinput && selectedRow != counter){
            file.close();
            return 1; //data already exists
        }
+       counter++;
     }
     file.close();
     return 0; //no error

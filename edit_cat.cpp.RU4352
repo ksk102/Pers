@@ -1,27 +1,34 @@
-#include "add_cat.h"
-#include "ui_add_cat.h"
+#include "edit_cat.h"
+#include "ui_edit_cat.h"
 #include <QMessageBox>
 #include <QFile>
 #include <QTextStream>
 
-add_cat::add_cat(QWidget *parent) :
+edit_cat::edit_cat(QWidget *parent) :
     QDialog(parent),
-    ui(new Ui::add_cat)
+    ui(new Ui::edit_cat)
 {
     ui->setupUi(this);
+
+    retrieveRecord(selectedRow);
 }
 
-add_cat::~add_cat()
+edit_cat::~edit_cat()
 {
     delete ui;
 }
 
-void add_cat::on_btn_confirm_clicked()
+void edit_cat::setSelectedRow(int currentRow)
 {
-    QString catName = ui->txt_catName->text();
+    this->selectedRow = currentRow;
+}
+
+void edit_cat::on_btn_confirm_clicked()
+{
+   /* QString catName = ui->txt_catName->text();
 
     gen = new general();
-    int userInputCheck = gen->checkUserInput("category.txt", catName,-1); //check user input
+    int userInputCheck = gen->checkUserInput("category.txt", catName); //check user input
 
     switch(userInputCheck){
         case 1:
@@ -43,17 +50,17 @@ void add_cat::on_btn_confirm_clicked()
             writeNewCategory(catName); //add into text file
             this->close();
             break;
-    }
+    }*/
 }
 
-void add_cat::on_btn_cancel_clicked()
+void edit_cat::on_btn_cancel_clicked()
 {
     this->close();
 }
 
-void add_cat::writeNewCategory(QString catName)
+void edit_cat::writeNewCategory(QString catName)
 {
-    //open file
+    /*//open file
     QFile file("category.txt");
 
     //append new entry into file
@@ -71,5 +78,39 @@ void add_cat::writeNewCategory(QString catName)
     file.close();
 
     //show sucessful alert box
-    QMessageBox::information(this,"Sucessful","\""+catName+"\" has been sucessfully added into system.");
+    QMessageBox::information(this,"Sucessful","\""+catName+"\" has been sucessfully added into system.");*/
+}
+
+void edit_cat::retrieveRecord(int selectedRow)
+{
+
+    //open file
+    QFile file("category.txt");
+
+    //open file for write only
+    if(!file.open(QFile::ReadOnly | QFile::Text))
+    {
+        QMessageBox::critical(this,"Unsucessful","Unable to read the file");
+        return;
+    }
+
+    QTextStream in(&file);
+    QString line;
+
+    int counter = 0;
+    while (!in.atEnd()) {
+
+       line = in.readLine();
+
+       if(counter == selectedRow){
+           ui->txt_catName->setText(line);
+           break;
+       }
+       counter++;
+
+    }
+
+    file.close();
+
+    return true;
 }

@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include "add_cat.h"
+#include "edit_cat.h"
 #include "general.h"
 
 namespace Ui {
@@ -28,6 +29,7 @@ private slots:
 private:
     Ui::Category_mst *ui;
     add_cat *addCat;
+    edit_cat *editCat;
     general *gen;
 
     void showListing(QString);

@@ -33,7 +33,8 @@ SOURCES += \
     add_cat.cpp \
     warnline_mst.cpp \
     add_warn.cpp \
-    general.cpp
+    general.cpp \
+    edit_cat.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -41,11 +42,13 @@ HEADERS += \
     add_cat.h \
     warnline_mst.h \
     add_warn.h \
-    general.h
+    general.h \
+    edit_cat.h
 
 FORMS += \
         mainwindow.ui \
     category_mst.ui \
     add_cat.ui \
     warnline_mst.ui \
-    add_warn.ui
+    add_warn.ui \
+    edit_cat.ui
