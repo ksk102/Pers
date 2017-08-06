@@ -26,7 +26,8 @@ void edit_cat::on_btn_confirm_clicked()
     switch(userInputCheck){
         case 1:
             QMessageBox::warning(this,"unsuccessful",catName+" is already exist");
-            ui->txt_catName->setText("");
+            ui->txt_catName->selectAll();
+            ui->txt_catName->setFocus();
             break;
         case 2:
             QMessageBox::critical(this,"unsuccessful","Couldn't open the file");
@@ -37,7 +38,8 @@ void edit_cat::on_btn_confirm_clicked()
             break;
         case 4:
             QMessageBox::warning(this,"unsuccessful","Invalid symbol \"|||\"");
-            ui->txt_catName->setText("");
+            ui->txt_catName->selectAll();
+            ui->txt_catName->setFocus();
             break;
         default:
             editCategory(catName, this->selectedId); //edit the record on text file

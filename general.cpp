@@ -330,3 +330,13 @@ bool general::editRecord(QString filename, QString userInputData, QString curId)
 
     return true;
 }
+
+QString general::convertIdName(QString filename, QString Id)
+{
+    QString theRecordLine = retrieveEditRecord(filename, Id);
+
+    QStringList theRecordLineList = theRecordLine.split("|||||");
+    QString name = theRecordLineList[1];
+
+    return name;
+}

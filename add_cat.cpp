@@ -27,18 +27,20 @@ void add_cat::on_btn_confirm_clicked()
     switch(userInputCheck){
         case 1:
             QMessageBox::warning(this,"unsuccessful",catName+" is already exist");
-            ui->txt_catName->setText("");
+            ui->txt_catName->selectAll();
+            ui->txt_catName->setFocus();
             break;
         case 2:
             QMessageBox::critical(this,"unsuccessful","Couldn't open the file");
             break;
         case 3: //user input is empty
-            QMessageBox::warning(this,"unsuccessful","Please enter a new category to add into system");
+            QMessageBox::warning(this,"unsuccessful","Please enter a name");
             ui->txt_catName->setFocus();
             break;
         case 4:
             QMessageBox::warning(this,"unsuccessful","Invalid symbol \"|||\"");
-            ui->txt_catName->setText("");
+            ui->txt_catName->selectAll();
+            ui->txt_catName->setFocus();
             break;
         default:
             returnString = gen->writeNewRecord("category.txt", catName); //add into text file

@@ -16,6 +16,7 @@ public:
     QStringList retrieveRecords(QString, QString); //retrieve records from textfile
     QString retrieveEditRecord(QString, QString); //retrieve recods for edit windows
     bool editRecord(QString, QString, QString); //save the editted record into system
+    QString convertIdName(QString, QString);
 };
 
 #endif // GENERAL_H
