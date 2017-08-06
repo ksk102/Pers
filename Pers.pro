@@ -11,6 +11,9 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = Pers
 TEMPLATE = app
 
+# set application icon
+RC_FILE = Pers.rc
+
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which as been marked as deprecated (the exact warnings
 # depend on your compiler). Please consult the documentation of the
@@ -25,10 +28,27 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
         main.cpp \
-        mainwindow.cpp
+        mainwindow.cpp \
+    category_mst.cpp \
+    add_cat.cpp \
+    warnline_mst.cpp \
+    add_warn.cpp \
+    general.cpp \
+    edit_cat.cpp
 
 HEADERS += \
-        mainwindow.h
+        mainwindow.h \
+    category_mst.h \
+    add_cat.h \
+    warnline_mst.h \
+    add_warn.h \
+    general.h \
+    edit_cat.h
 
 FORMS += \
-        mainwindow.ui
+        mainwindow.ui \
+    category_mst.ui \
+    add_cat.ui \
+    warnline_mst.ui \
+    add_warn.ui \
+    edit_cat.ui
