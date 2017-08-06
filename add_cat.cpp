@@ -19,9 +19,10 @@ add_cat::~add_cat()
 void add_cat::on_btn_confirm_clicked()
 {
     QString catName = ui->txt_catName->text();
+    int returnString = 0;
 
     gen = new general();
-    int userInputCheck = gen->checkUserInput("category.txt", catName,-1); //check user input
+    int userInputCheck = gen->checkUserInput("category.txt", catName, "-1"); //check user input
 
     switch(userInputCheck){
         case 1:
@@ -40,36 +41,24 @@ void add_cat::on_btn_confirm_clicked()
             ui->txt_catName->setText("");
             break;
         default:
-            writeNewCategory(catName); //add into text file
-            this->close();
+            returnString = gen->writeNewRecord("category.txt", catName); //add into text file
             break;
+    }
+
+    switch(returnString){
+        case -1:
+            QMessageBox::critical(this,"Unsucessful","Couldn't open the file");
+        break;
+        case 1:
+            QMessageBox::information(this,"Sucessful","\""+catName+"\" has been sucessfully added into system.");
+            this->close();
+        break;
+        default: //is not a result from previous switch case
+        break;
     }
 }
 
 void add_cat::on_btn_cancel_clicked()
 {
     this->close();
-}
-
-void add_cat::writeNewCategory(QString catName)
-{
-    //open file
-    QFile file("category.txt");
-
-    //append new entry into file
-    if(!file.open(QFile::Append | QFile::Text))
-    {
-        //show unsucessful alert box
-        QMessageBox::critical(this,"Unsucessful","Error occur while adding \""+catName+"\" into the system");
-        return;
-    }
-
-    //writing new entry into file
-    QTextStream out(&file);
-    out << catName << endl;
-    file.flush();
-    file.close();
-
-    //show sucessful alert box
-    QMessageBox::information(this,"Sucessful","\""+catName+"\" has been sucessfully added into system.");
 }

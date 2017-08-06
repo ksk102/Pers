@@ -26,14 +26,18 @@ private slots:
 
     void on_btn_delete_clicked();
 
+    void on_btn_search_clicked();
+
 private:
+    QString searchString;
+
     Ui::Category_mst *ui;
     add_cat *addCat;
     edit_cat *editCat;
     general *gen;
 
-    void showListing(QString);
-    void retrieveCategory();
+    void showListing(QString, QString); //show listing on the treewidget
+    void retrieveCategory(QString); //retrieve records from file
 };
 
 #endif // CATEGORY_MST_H

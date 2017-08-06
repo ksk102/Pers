@@ -17,7 +17,7 @@ public:
     explicit edit_cat(QWidget *parent = 0);
     ~edit_cat();
 
-    void retrieveRecord(int); //get the data into the textbox
+    void retrieveRecord(QString); //get the data into the textbox
 
 private slots:
     void on_btn_confirm_clicked();
@@ -26,12 +26,12 @@ private slots:
 
 private:
 
-    int selectedRow; //current selected record
+    QString selectedId; //current selected record
 
     Ui::edit_cat *ui;
     general *gen;
 
-    void editCategory(QString, int); //edit the record in category.txt
+    void editCategory(QString, QString); //edit the record in category.txt
 };
 
 #endif // EDIT_CAT_H

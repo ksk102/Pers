@@ -25,8 +25,6 @@ private slots:
 private:
     Ui::add_cat *ui;
     general *gen;
-
-    void writeNewCategory(QString); //to write new category into category.txt
 };
 
 #endif // ADD_CAT_H

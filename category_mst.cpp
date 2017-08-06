@@ -11,9 +11,11 @@ Category_mst::Category_mst(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    ui->tw_catList->setColumnCount(1); //set the listing column number
-    ui->tw_catList->setHeaderLabel("Category Name"); //set the column header name
-    retrieveCategory(); //show the listing
+    searchString = ui->txt_name->text();
+
+    ui->tw_catList->setColumnCount(2); //set the listing column number
+    ui->tw_catList->setHeaderLabels(QStringList() << "Category ID" << "Category Name"); //set the columns header name
+    retrieveCategory(searchString); //show the listing
 }
 
 Category_mst::~Category_mst()
@@ -27,41 +29,34 @@ void Category_mst::on_btn_addNew_clicked()
     addCat->setModal(true);
     addCat->exec();
 
-    ui->tw_catList->clear(); //clear the listing
-    retrieveCategory(); //show the listing
+    retrieveCategory(searchString); //show the listing
 }
 
-void Category_mst::showListing(QString item)
+void Category_mst::showListing(QString catId, QString catName)
 {
     QTreeWidgetItem *itm = new QTreeWidgetItem(ui->tw_catList);
-    itm->setText(0, item); //column, data
+    itm->setText(0, catId); //column, data
+    itm->setText(1, catName); //column, data
 }
 
-void Category_mst::retrieveCategory()
+void Category_mst::retrieveCategory(QString searchString)
 {
-    //open file
-    QFile file("category.txt");
+    ui->tw_catList->clear(); //clear the listing
 
-    //check if file exists
-    if(!file.exists()){
-        return;
+    gen = new general();
+    QStringList recordsList = gen->retrieveRecords("category.txt", searchString); //call the method to get the records from text file
+
+    QStringList catRecord;
+    QString catId;
+    QString catName;
+
+    for(int i=0; i<recordsList.size(); i++){
+        catRecord = recordsList[i].split("|||||");
+        catId = catRecord[0];
+        catName = catRecord[1];
+
+        showListing(catId, catName);
     }
-
-    //open file for read only
-    if(!file.open(QFile::ReadOnly | QFile::Text))
-    {
-        return; //couldn't open the file
-    }
-
-    //read the file line by line
-    QTextStream in(&file);
-    QString line;
-
-    while (!in.atEnd()) {
-       line = in.readLine();
-       showListing(line);
-    }
-    file.close();
 }
 
 void Category_mst::on_btn_edit_clicked()
@@ -74,13 +69,14 @@ void Category_mst::on_btn_edit_clicked()
         return;
     }
 
+    QString currentId = ui->tw_catList->currentItem()->text(0);
+
     editCat = new edit_cat(this);
-    editCat->retrieveRecord(currentRow);
+    editCat->retrieveRecord(currentId);
     editCat->setModal(true);
     editCat->exec();
 
-    ui->tw_catList->clear(); //clear the listing
-    retrieveCategory(); //show the listing
+    retrieveCategory(searchString); //show the listing
 }
 
 void Category_mst::on_btn_delete_clicked()
@@ -92,19 +88,26 @@ void Category_mst::on_btn_delete_clicked()
         QMessageBox::information(this,"Error","Please select the record that you wish to delete");
         return;
     }
+    QString currentId = ui->tw_catList->currentItem()->text(0);
 
     //selected row's name
-    QString currentText = ui->tw_catList->currentItem()->text(0);
+    QString currentText = ui->tw_catList->currentItem()->text(1);
     int reply = QMessageBox::question(this,"Delete Record","Are you sure want to delete " +currentText+"?", QMessageBox::Yes|QMessageBox::No);
 
     if(reply == QMessageBox::Yes){
 
         gen = new general();
-        if(!gen->deleteRecord("category",currentRow)){
+        if(!gen->deleteRecord("category",currentId)){
             QMessageBox::critical(this,"Unsucessful","Error occur while deleting the data");
         }
-        ui->tw_catList->clear();
-        retrieveCategory();
+
+        retrieveCategory(searchString);
 
     }
+}
+
+void Category_mst::on_btn_search_clicked()
+{
+    searchString = ui->txt_name->text();
+    retrieveCategory(searchString);
 }

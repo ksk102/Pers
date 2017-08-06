@@ -96,9 +96,6 @@
       <bold>false</bold>
      </font>
     </property>
-    <property name="indentation">
-     <number>10</number>
-    </property>
     <column>
      <property name="text">
       <string>1</string>
@@ -106,15 +103,9 @@
      <property name="toolTip">
       <string/>
      </property>
-     <property name="font">
-      <font>
-       <weight>75</weight>
-       <bold>true</bold>
-      </font>
-     </property>
     </column>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>9</x>
