@@ -13,10 +13,9 @@ warnLine_mst::~warnLine_mst()
     delete ui;
 }
 
-void warnLine_mst::on_pushButton_clicked()
+void warnLine_mst::on_btn_add_clicked()
 {
     addWarn = new add_warn(this);
-    //addWarn->show();
     addWarn->setModal(true);
     addWarn->exec();
 }

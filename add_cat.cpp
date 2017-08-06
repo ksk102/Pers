@@ -26,18 +26,18 @@ void add_cat::on_btn_confirm_clicked()
 
     switch(userInputCheck){
         case 1:
-            QMessageBox::warning(this,"Unsucessful",catName+" is already exist");
+            QMessageBox::warning(this,"unsuccessful",catName+" is already exist");
             ui->txt_catName->setText("");
             break;
         case 2:
-            QMessageBox::critical(this,"Unsucessful","Couldn't open the file");
+            QMessageBox::critical(this,"unsuccessful","Couldn't open the file");
             break;
         case 3: //user input is empty
-            QMessageBox::warning(this,"Unsucessful","Please enter a new category to add into system");
+            QMessageBox::warning(this,"unsuccessful","Please enter a new category to add into system");
             ui->txt_catName->setFocus();
             break;
         case 4:
-            QMessageBox::warning(this,"Unsucessful","Invalid symbol \"|||\"");
+            QMessageBox::warning(this,"unsuccessful","Invalid symbol \"|||\"");
             ui->txt_catName->setText("");
             break;
         default:
@@ -47,7 +47,7 @@ void add_cat::on_btn_confirm_clicked()
 
     switch(returnString){
         case -1:
-            QMessageBox::critical(this,"Unsucessful","Couldn't open the file");
+            QMessageBox::critical(this,"unsuccessful","Couldn't open the file");
         break;
         case 1:
             QMessageBox::information(this,"Sucessful","\""+catName+"\" has been sucessfully added into system.");

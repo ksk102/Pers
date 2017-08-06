@@ -17,7 +17,8 @@ public:
     ~warnLine_mst();
 
 private slots:
-    void on_pushButton_clicked();
+
+    void on_btn_add_clicked();
 
 private:
     Ui::warnLine_mst *ui;

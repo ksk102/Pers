@@ -98,7 +98,7 @@ void Category_mst::on_btn_delete_clicked()
 
         gen = new general();
         if(!gen->deleteRecord("category",currentId)){
-            QMessageBox::critical(this,"Unsucessful","Error occur while deleting the data");
+            QMessageBox::critical(this,"unsuccessful","Error occur while deleting the data");
         }
 
         retrieveCategory(searchString);

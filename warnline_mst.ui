@@ -7,29 +7,29 @@
     <x>0</x>
     <y>0</y>
     <width>640</width>
-    <height>480</height>
+    <height>560</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Warning Line Listing - Pers</string>
   </property>
-  <widget class="QGroupBox" name="groupBox">
+  <widget class="QGroupBox" name="gb_search">
    <property name="geometry">
     <rect>
      <x>10</x>
      <y>10</y>
      <width>621</width>
-     <height>151</height>
+     <height>191</height>
     </rect>
    </property>
    <property name="title">
     <string>Search Warning Line</string>
    </property>
-   <widget class="QPushButton" name="pushButton_2">
+   <widget class="QPushButton" name="btn_search">
     <property name="geometry">
      <rect>
       <x>460</x>
-      <y>123</y>
+      <y>160</y>
       <width>156</width>
       <height>23</height>
      </rect>
@@ -38,21 +38,18 @@
      <string>Search</string>
     </property>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>10</x>
       <y>20</y>
       <width>531</width>
-      <height>100</height>
+      <height>126</height>
      </rect>
     </property>
     <layout class="QGridLayout" name="gridLayout">
-     <item row="1" column="2">
-      <widget class="QLineEdit" name="lineEdit_2"/>
-     </item>
      <item row="1" column="0" colspan="2">
-      <widget class="QLabel" name="label_2">
+      <widget class="QLabel" name="lbl_pointFrom">
        <property name="font">
         <font>
          <pointsize>8</pointsize>
@@ -63,40 +60,31 @@
        </property>
       </widget>
      </item>
+     <item row="0" column="2">
+      <widget class="QLineEdit" name="txt_name"/>
+     </item>
+     <item row="2" column="2">
+      <widget class="QLineEdit" name="txt_pointTo"/>
+     </item>
+     <item row="1" column="2">
+      <widget class="QLineEdit" name="txt_pointFrom"/>
+     </item>
      <item row="2" column="0">
-      <widget class="QLabel" name="label_3">
+      <widget class="QLabel" name="lbl_pointTo">
        <property name="text">
         <string>Warning Point To (RM):</string>
        </property>
       </widget>
      </item>
-     <item row="0" column="2">
-      <widget class="QLineEdit" name="lineEdit"/>
-     </item>
-     <item row="2" column="2">
-      <widget class="QLineEdit" name="lineEdit_3"/>
-     </item>
-     <item row="0" column="0" colspan="2">
-      <widget class="QLabel" name="label">
-       <property name="font">
-        <font>
-         <pointsize>8</pointsize>
-        </font>
-       </property>
-       <property name="text">
-        <string>Warning Name:</string>
-       </property>
-      </widget>
-     </item>
      <item row="3" column="0">
-      <widget class="QLabel" name="label_4">
+      <widget class="QLabel" name="lbl_type">
        <property name="text">
         <string>Warning Type:</string>
        </property>
       </widget>
      </item>
      <item row="3" column="2">
-      <widget class="QComboBox" name="comboBox">
+      <widget class="QComboBox" name="list_warnType">
        <item>
         <property name="text">
          <string>&lt;Select one&gt;</string>
@@ -124,97 +112,112 @@
        </item>
       </widget>
      </item>
+     <item row="0" column="0" colspan="2">
+      <widget class="QLabel" name="lbl_name">
+       <property name="font">
+        <font>
+         <pointsize>8</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Warning Name:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="0">
+      <widget class="QLabel" name="lbl_cat">
+       <property name="text">
+        <string>Category:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="2">
+      <widget class="QComboBox" name="list_cat">
+       <item>
+        <property name="text">
+         <string>&lt;Select one&gt;</string>
+        </property>
+       </item>
+      </widget>
+     </item>
     </layout>
    </widget>
-   <zorder>pushButton_2</zorder>
-   <zorder>lineEdit_2</zorder>
-   <zorder>label_2</zorder>
-   <zorder>lineEdit</zorder>
-   <zorder>label</zorder>
-   <zorder>label</zorder>
-   <zorder>label_2</zorder>
-   <zorder>lineEdit_2</zorder>
-   <zorder>label</zorder>
-   <zorder>label_2</zorder>
-   <zorder>lineEdit</zorder>
-   <zorder>lineEdit_2</zorder>
-   <zorder>label</zorder>
-   <zorder>label_2</zorder>
-   <zorder>lineEdit</zorder>
-   <zorder>lineEdit</zorder>
-   <zorder>lineEdit_2</zorder>
-   <zorder>label</zorder>
-   <zorder>label_2</zorder>
-   <zorder>lineEdit_2</zorder>
-   <zorder>label</zorder>
-   <zorder>label_2</zorder>
-   <zorder>lineEdit_2</zorder>
-   <zorder>label</zorder>
-   <zorder>label_2</zorder>
+   <zorder>layoutWidget</zorder>
+   <zorder>btn_search</zorder>
   </widget>
-  <widget class="QGroupBox" name="groupBox_2">
+  <widget class="QGroupBox" name="gb_listing">
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>170</y>
+     <y>210</y>
      <width>621</width>
-     <height>301</height>
+     <height>341</height>
     </rect>
    </property>
    <property name="title">
     <string>Warning Listing</string>
    </property>
-   <widget class="QTableView" name="tableView">
+   <widget class="QTreeWidget" name="tw_warnList">
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>60</y>
+      <y>50</y>
       <width>601</width>
-      <height>231</height>
+      <height>281</height>
      </rect>
     </property>
+    <column>
+     <property name="text">
+      <string notr="true">1</string>
+     </property>
+    </column>
    </widget>
    <widget class="QWidget" name="">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>30</y>
-      <width>158</width>
+      <x>9</x>
+      <y>20</y>
+      <width>239</width>
       <height>25</height>
      </rect>
     </property>
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
-      <widget class="QPushButton" name="pushButton">
+      <widget class="QPushButton" name="btn_add">
        <property name="text">
         <string>Add New</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="pushButton_3">
+      <widget class="QPushButton" name="btn_edit">
        <property name="text">
-        <string>Refresh</string>
+        <string>Edit</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btn_delete">
+       <property name="text">
+        <string>Delete</string>
        </property>
       </widget>
      </item>
     </layout>
    </widget>
-   <zorder>pushButton</zorder>
-   <zorder>tableView</zorder>
-   <zorder></zorder>
-   <zorder>pushButton_3</zorder>
   </widget>
  </widget>
  <tabstops>
-  <tabstop>lineEdit</tabstop>
-  <tabstop>lineEdit_2</tabstop>
-  <tabstop>lineEdit_3</tabstop>
-  <tabstop>comboBox</tabstop>
-  <tabstop>pushButton_2</tabstop>
-  <tabstop>pushButton</tabstop>
-  <tabstop>pushButton_3</tabstop>
-  <tabstop>tableView</tabstop>
+  <tabstop>txt_name</tabstop>
+  <tabstop>txt_pointFrom</tabstop>
+  <tabstop>txt_pointTo</tabstop>
+  <tabstop>list_warnType</tabstop>
+  <tabstop>list_cat</tabstop>
+  <tabstop>btn_search</tabstop>
+  <tabstop>btn_add</tabstop>
+  <tabstop>btn_edit</tabstop>
+  <tabstop>btn_delete</tabstop>
+  <tabstop>tw_warnList</tabstop>
  </tabstops>
  <resources/>
  <connections/>

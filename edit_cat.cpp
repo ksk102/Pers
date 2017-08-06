@@ -25,18 +25,18 @@ void edit_cat::on_btn_confirm_clicked()
 
     switch(userInputCheck){
         case 1:
-            QMessageBox::warning(this,"Unsucessful",catName+" is already exist");
+            QMessageBox::warning(this,"unsuccessful",catName+" is already exist");
             ui->txt_catName->setText("");
             break;
         case 2:
-            QMessageBox::critical(this,"Unsucessful","Couldn't open the file");
+            QMessageBox::critical(this,"unsuccessful","Couldn't open the file");
             break;
         case 3: //user input is empty
-            QMessageBox::warning(this,"Unsucessful","Please enter a new category to add into system");
+            QMessageBox::warning(this,"unsuccessful","Please enter a new category to add into system");
             ui->txt_catName->setFocus();
             break;
         case 4:
-            QMessageBox::warning(this,"Unsucessful","Invalid symbol \"|||\"");
+            QMessageBox::warning(this,"unsuccessful","Invalid symbol \"|||\"");
             ui->txt_catName->setText("");
             break;
         default:
@@ -62,7 +62,7 @@ void edit_cat::editCategory(QString catName, QString curId)
         QMessageBox::information(this,"Sucessful","\""+catName+"\" has been sucessfully added into system.");
     }
     else{
-        QMessageBox::critical(this,"Unsucessful","Error occur while trying to edit the record");
+        QMessageBox::critical(this,"unsuccessful","Error occur while trying to edit the record");
     }
 }
 
@@ -75,11 +75,11 @@ void edit_cat::retrieveRecord(QString curId)
     QStringList currentRecord;
 
     if(returnString == "|||||-1"){
-        QMessageBox::critical(this,"Unsucessful","Unable to read the file");
+        QMessageBox::critical(this,"unsuccessful","Unable to read the file");
         return;
     }
     else if(returnString == "|||||-2"){ //unable to find the record
-        QMessageBox::critical(this,"Unsucessful","Error occured while trying to get the record");
+        QMessageBox::critical(this,"unsuccessful","Error occured while trying to get the record");
         return;
     }
     else{
