@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include "category_mst.h"
 #include "warnline_mst.h"
+#include "recur_expenses_mst.h"
 
 namespace Ui {
 class MainWindow;
@@ -22,10 +23,13 @@ private slots:
 
     void on_btn_addWarn_clicked();
 
+    void on_btn_addRecur_clicked();
+
 private:
     Ui::MainWindow *ui;
     Category_mst *categoryMst;
     warnLine_mst *warnLineMst;
+    recur_expenses_mst *recurMst;
 };
 
 #endif // MAINWINDOW_H

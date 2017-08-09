@@ -28,3 +28,10 @@ void MainWindow::on_btn_addWarn_clicked()
     warnLineMst->setModal(true);
     warnLineMst->exec();
 }
+
+void MainWindow::on_btn_addRecur_clicked()
+{
+    recurMst = new recur_expenses_mst(this);
+    recurMst->setModal(true);
+    recurMst->exec();
+}

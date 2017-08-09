@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>add_recur</class>
+ <widget class="QDialog" name="add_recur">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>640</width>
+    <height>220</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Add Recurring Expense</string>
+  </property>
+  <widget class="QGroupBox" name="gb_addNew">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>10</y>
+     <width>621</width>
+     <height>201</height>
+    </rect>
+   </property>
+   <property name="title">
+    <string>Add New Recurring Expense</string>
+   </property>
+   <widget class="QWidget" name="layoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>20</y>
+      <width>601</width>
+      <height>129</height>
+     </rect>
+    </property>
+    <layout class="QGridLayout" name="gridLayout">
+     <item row="3" column="0">
+      <widget class="QLabel" name="lbl_type">
+       <property name="text">
+        <string>Recurring Type:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1" colspan="2">
+      <widget class="QLineEdit" name="txt_amount"/>
+     </item>
+     <item row="0" column="1" colspan="2">
+      <widget class="QLineEdit" name="txt_name"/>
+     </item>
+     <item row="0" column="0">
+      <widget class="QLabel" name="lbl_name">
+       <property name="font">
+        <font>
+         <pointsize>8</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Expense Name:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="1">
+      <widget class="QComboBox" name="lst_recurType">
+       <item>
+        <property name="text">
+         <string>&lt;Select one&gt;</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Daily</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Monthly</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Yearly</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="lbl_amount">
+       <property name="font">
+        <font>
+         <pointsize>8</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Expense Amount (RM):</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="2">
+      <widget class="QComboBox" name="lst_daytype">
+       <item>
+        <property name="text">
+         <string>Every Day</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Every Weekday</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Every Weekend</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+     <item row="2" column="0">
+      <widget class="QLabel" name="lbl_cat">
+       <property name="text">
+        <string>Category</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1" colspan="2">
+      <widget class="QComboBox" name="lst_cat">
+       <item>
+        <property name="text">
+         <string>&lt;Select one&gt;</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+    </layout>
+    <zorder>lbl_name</zorder>
+    <zorder>txt_name</zorder>
+    <zorder>lbl_amount</zorder>
+    <zorder>lbl_type</zorder>
+    <zorder>lst_recurType</zorder>
+    <zorder>txt_amount</zorder>
+    <zorder>lst_daytype</zorder>
+    <zorder>lbl_cat</zorder>
+    <zorder>lst_cat</zorder>
+   </widget>
+   <widget class="QWidget" name="layoutWidget_2">
+    <property name="geometry">
+     <rect>
+      <x>450</x>
+      <y>160</y>
+      <width>158</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QPushButton" name="btn_confirm">
+       <property name="text">
+        <string>OK</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btn_cancel">
+       <property name="text">
+        <string>Cancel</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+ </widget>
+ <tabstops>
+  <tabstop>txt_name</tabstop>
+  <tabstop>txt_amount</tabstop>
+  <tabstop>lst_cat</tabstop>
+  <tabstop>lst_recurType</tabstop>
+  <tabstop>lst_daytype</tabstop>
+  <tabstop>btn_confirm</tabstop>
+  <tabstop>btn_cancel</tabstop>
+ </tabstops>
+ <resources/>
+ <connections/>
+</ui>

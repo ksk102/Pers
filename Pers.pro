@@ -36,7 +36,12 @@ SOURCES += \
     general.cpp \
     edit_cat.cpp \
     edit_warn.cpp \
-    common_warn.cpp
+    common_warn.cpp \
+    add_recur.cpp \
+    common_recur.cpp \
+    common_general.cpp \
+    recur_expenses_mst.cpp \
+    edit_recur.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -47,7 +52,12 @@ HEADERS += \
     general.h \
     edit_cat.h \
     edit_warn.h \
-    common_warn.h
+    common_warn.h \
+    add_recur.h \
+    common_recur.h \
+    common_general.h \
+    recur_expenses_mst.h \
+    edit_recur.h
 
 FORMS += \
         mainwindow.ui \
@@ -56,4 +66,7 @@ FORMS += \
     warnline_mst.ui \
     add_warn.ui \
     edit_cat.ui \
-    edit_warn.ui
+    edit_warn.ui \
+    add_recur.ui \
+    recur_expenses_mst.ui \
+    edit_recur.ui
