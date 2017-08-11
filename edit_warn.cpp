@@ -8,34 +8,31 @@ edit_warn::edit_warn(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    QString warnType = ui->list_warnType->currentText();
+    comGen = new common_general();
+    comGen->setFileName("warnline.txt");
+    comGen->setTmpFileName("warnline_tmp.txt");
 
+    retrieveCategory(); //retrieve category from text file
+
+    //to show or hide day type listbox
+    QString warnType = ui->lst_warnType->currentText();
     showHideDayType(warnType);
-
-    if(!(retrieveCategory())){
-         QMessageBox::critical(this,"unsuccessful","Unable to retrieve category");
-    }
-
 }
 
 edit_warn::~edit_warn()
 {
     delete ui;
+    delete comGen;
 }
 
 void edit_warn::retrieveRecord(QString curId)
 {
     this->selectedId = curId;
 
-    gen = new general();
-    QString returnString = gen->retrieveEditRecord("warnline.txt", curId);
+    QString returnString = comGen->retrieveEditRecord("", curId);
     QStringList currentRecord;
 
-    if(returnString == "|||||-1"){
-        QMessageBox::critical(this,"unsuccessful","Unable to read the file");
-        return;
-    }
-    else if(returnString == "|||||-2"){ //unable to find the record
+    if(returnString == "|||||-2"){ //unable to find the record
         QMessageBox::critical(this,"unsuccessful","Error occured while trying to get the record");
         return;
     }
@@ -47,72 +44,57 @@ void edit_warn::retrieveRecord(QString curId)
         QString warnType = currentRecord[3];
         QString warnDayType = currentRecord[4];
         QString warnCat = currentRecord[5];
-        QString warnCatName = gen->convertIdName("category.txt", warnCat);
+        QString warnCatName = comGen->convertIdName("category.txt", warnCat);
 
         ui->txt_name->setText(warnName);
         ui->txt_point->setText(warnPoint);
-        ui->list_warnType->setCurrentText(warnType);
+        ui->lst_warnType->setCurrentText(warnType);
         ui->lst_daytype->setCurrentText(warnDayType);
-        ui->list_cat->setCurrentText(warnCatName);
+        ui->lst_cat->setCurrentText(warnCatName);
     }
 }
 
 void edit_warn::on_btn_confirm_clicked()
 {
+    //get user input
     QString warnName = ui->txt_name->text();
     QString warnPoint = ui->txt_point->text();
-    QString warnType = ui->list_warnType->currentText();
+    QString warnType = ui->lst_warnType->currentText();
     QString warnDayType = ui->lst_daytype->currentText();
-    int warn_catId = ui->list_cat->currentData().toInt();
+    int warn_catId = ui->lst_cat->currentData().toInt();
     QString warnCatId = QString::number(warn_catId);
 
-    comWarn = new common_warn();
+    //return empty if user didn't select a type
+    warnType = comGen->listBoxIsEmpty(warnType);
 
-    warnType = comWarn->listBoxIsEmpty(warnType);
-    warnDayType = comWarn->listBoxIsEmpty(warnDayType);
+    //if user didn't select 'day' as the recurring type, then save recurDayType as empty
+    if(!comGen->DayTypeString(warnType)){
+        warnDayType = "";
+    }
 
     if(!(preCheckUserInput(warnName, warnPoint, warnType))){
         return;
     }
 
-    QString passData = warnName + "|||||" + warnPoint + "|||||" + warnType + "|||||" + warnDayType + "|||||" + warnCatId;
+    //data to save into new file
+    QStringList passData;
+    passData << warnName << warnPoint << warnType << warnDayType << warnCatId;
 
-    gen = new general();
-    int userInputCheck = gen->checkUserInput("warnline.txt", passData, this->selectedId); //check user input
-
-    switch(userInputCheck){
-        case 1:
-            QMessageBox::warning(this,"unsuccessful",warnName+" is already exist");
-            ui->txt_name->selectAll();
-            ui->txt_name->setFocus();
-            break;
-        case 2:
-            QMessageBox::critical(this,"unsuccessful","Couldn't open the file");
-            break;
-        case 3: //user input is empty
-            QMessageBox::warning(this,"unsuccessful","Please enter a name");
-            ui->txt_name->setFocus();
-            break;
-        case 4:
-            QMessageBox::warning(this,"unsuccessful","Invalid symbol \"|||\"");
-            ui->txt_name->selectAll();
-            ui->txt_name->setFocus();
-            break;
-        default:
-            editWarnLine(passData, this->selectedId); //edit the record on text file
-            this->close();
-            break;
+    //write record into file
+    if(comGen->writeNewRecord(passData, this->selectedId)){
+        QMessageBox::information(this,"Sucessful","Sucessfully editted the record");
+        this->close();
+    }
+    else{
+        QMessageBox::warning(this,"Unsuccessful",warnName+" is already exist");
+        ui->txt_name->selectAll();
+        ui->txt_name->setFocus();
     }
 }
 
 void edit_warn::on_btn_cancel_clicked()
 {
     this->close();
-}
-
-void edit_warn::on_list_warnType_currentIndexChanged(const QString &arg1)
-{
-    showHideDayType(arg1);
 }
 
 void edit_warn::showHideDayType(QString warnType)
@@ -126,10 +108,10 @@ void edit_warn::showHideDayType(QString warnType)
     }
 }
 
-bool edit_warn::retrieveCategory()
+void edit_warn::retrieveCategory()
 {
-    gen = new general();
-    QStringList recordsList = gen->retrieveRecords("category.txt", ""); //call the method to get the records from text file
+    //call the method to get the records from text file
+    QStringList recordsList = comGen->retrieveRecords("category.txt", "");
 
     QStringList catRecord;
     QString catId;
@@ -140,15 +122,8 @@ bool edit_warn::retrieveCategory()
         catId = catRecord[0];
         catName = catRecord[1];
 
-        showListing(catId, catName);
+        ui->lst_cat->addItem(catName, catId);
     }
-
-    return true;
-}
-
-void edit_warn::showListing(QString catId, QString catName)
-{
-    ui->list_cat->addItem(catName, catId);
 }
 
 bool edit_warn::preCheckUserInput(QString warnName, QString warnPoint, QString warnType)
@@ -156,37 +131,53 @@ bool edit_warn::preCheckUserInput(QString warnName, QString warnPoint, QString w
     comWarn = new common_warn();
     int returnInt = comWarn->preCheckUserInput(warnName, warnPoint, warnType);
 
+    //if returnInt is
+    // -1, name is empty
+    // -2, name contain Invalid symbol
+    // -3, amount contain Invalid symbol
+    // -4, amount is empty
+    // -5, amount is not number
+    // -6, type is empty
+    // 1, all field are enterred correctly
+
     switch(returnInt){
      case -1:
-        QMessageBox::warning(this,"unsuccessful","Invalid symbol \"|||\"");
-        ui->txt_name->selectAll();
+        QMessageBox::warning(this,"unsuccessful","Please enter a name");
         ui->txt_name->setFocus();
 
         return false;
         break;
     case -2:
+       QMessageBox::warning(this,"unsuccessful","Invalid symbol \"|||\"");
+       ui->txt_name->selectAll();
+       ui->txt_name->setFocus();
+
+       return false;
+       break;
+    case -3:
         QMessageBox::warning(this,"unsuccessful","Invalid symbol \"|||\"");
         ui->txt_point->selectAll();
         ui->txt_point->setFocus();
 
         return false;
         break;
-    case -3:
-        QMessageBox::warning(this,"unsuccessful","Please enter the warning milestone");
-        ui->txt_point->setFocus();
-
-        return false;
-        break;
     case -4:
-        QMessageBox::warning(this,"unsuccessful","Please enter only digits for warning point");
+        QMessageBox::warning(this,"unsuccessful","Please enter the warning milestone");
         ui->txt_point->selectAll();
         ui->txt_point->setFocus();
 
         return false;
         break;
     case -5:
+        QMessageBox::warning(this,"unsuccessful","Please enter only digits for warning point");
+        ui->txt_point->selectAll();
+        ui->txt_point->setFocus();
+
+        return false;
+        break;
+    case -6:
         QMessageBox::warning(this,"unsuccessful","Please select a warning type");
-        ui->list_warnType->setFocus();
+        ui->lst_warnType->setFocus();
 
         return false;
         break;
@@ -196,17 +187,7 @@ bool edit_warn::preCheckUserInput(QString warnName, QString warnPoint, QString w
     }
 }
 
-void edit_warn::editWarnLine(QString passData, QString curId)
+void edit_warn::on_lst_warnType_currentIndexChanged(const QString &arg1)
 {
-    QString filename = "warnline";
-
-    gen = new general();
-    bool returnbool = gen->editRecord(filename, passData, curId);
-
-    if(returnbool){
-        QMessageBox::information(this,"Sucessful","Sucessfully editted the record");
-    }
-    else{
-        QMessageBox::critical(this,"unsuccessful","Error occur while trying to edit the record");
-    }
+    showHideDayType(arg1);
 }

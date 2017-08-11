@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Recurring Expenses Listing</string>
+   <string>Recurring Expenses Listing - Pers</string>
   </property>
   <widget class="QGroupBox" name="gb_search">
    <property name="geometry">

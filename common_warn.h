@@ -6,7 +6,6 @@
 class common_warn{
 public:
     //methods
-    QString listBoxIsEmpty(QString);
     int preCheckUserInput(QString, QString, QString);
 };
 

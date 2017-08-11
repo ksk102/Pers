@@ -2,10 +2,12 @@
 #define WARNLINE_MST_H
 
 #include <QDialog>
+#include <QStringList>
+#include <QTreeWidget>
+#include "common_general.h"
 #include "add_warn.h"
 #include "edit_warn.h"
 #include "common_warn.h"
-#include <QStringList>
 
 namespace Ui {
 class warnLine_mst;
@@ -29,20 +31,25 @@ private slots:
 
     void on_btn_search_clicked();
 
+    void on_tw_warnList_itemDoubleClicked(QTreeWidgetItem *item, int column);
+
 private:
-    QString searchString;
+    QStringList searchString;
 
     Ui::warnLine_mst *ui;
+    common_general *comGen;
+    common_warn *comWarn;
     add_warn *addWarn;
     edit_warn *editWarn;
-    general *gen;
-    common_warn *comWarn;
 
-    QStringList retrieveRecords(QString, QString); //retrieve listing from file
+    void retrieveCategory(); //retrieve category from text file
+    void setSearchString(); //get searchString from userinputs
+    void setColumnInfo();
+    void retrieveWarningList(); //retrieve records from file
+    QStringList retrieveRecords(); //retrieve listing from file
     void showListing(QString, QString, QString, QString, QString, QString); //show listing on the treewidget
-    void retrieveWarningList(QString); //retrieve records from file
-    bool retrieveCategory(); //get category list
-    void showCatListing(QString, QString); //show category list
+
+
 
 };
 

@@ -2,7 +2,7 @@
 #define EDIT_WARN_H
 
 #include <QDialog>
-#include "general.h"
+#include "common_general.h"
 #include "common_warn.h"
 
 namespace Ui {
@@ -24,20 +24,18 @@ private slots:
 
     void on_btn_cancel_clicked();
 
-    void on_list_warnType_currentIndexChanged(const QString &arg1);
+    void on_lst_warnType_currentIndexChanged(const QString &arg1);
 
 private:
     Ui::edit_warn *ui;
-    general *gen;
+    common_general *comGen;
     common_warn *comWarn;
 
     QString selectedId; //current selected record
 
-    void showHideDayType(QString); //to show or hide day type listbox
-    bool retrieveCategory(); //retrieve category from text file
-    void showListing(QString, QString); //to show category in the listbox
     bool preCheckUserInput(QString, QString, QString); //check user input
-    void editWarnLine(QString, QString); //edit the record in textfile
+    void retrieveCategory(); //retrieve category from text file
+    void showHideDayType(QString); //to show or hide day type listbox
 };
 
 #endif // EDIT_WARN_H

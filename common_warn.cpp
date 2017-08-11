@@ -1,34 +1,27 @@
 #include "common_warn.h"
 
-QString common_warn::listBoxIsEmpty(QString lstboxText)
-{
-    if(lstboxText == "<Select one>"){
-        return "";
-    }
-    else{
-        return lstboxText;
-    }
-}
-
-int common_warn::preCheckUserInput(QString warnName, QString warnPoint, QString warnType)
+int common_warn::preCheckUserInput(QString name, QString amount, QString type)
 {
     bool validate;
-    double dou_warnPoint = warnPoint.toDouble(&validate);
+    double dou_amount = amount.toDouble(&validate);
 
-    if(warnName.contains("|||", Qt::CaseInsensitive)){
-        return -1; //Name contain Invalid symbol
+    if(name == ""){
+        return -1; //name is empty
     }
-    else if(warnPoint.contains("|||", Qt::CaseInsensitive)){
-        return -2; //Point contain Invalid symbol
+    else if(name.contains("|||", Qt::CaseInsensitive)){
+        return -2; //name contain Invalid symbol
     }
-    else if(warnPoint == ""){
-        return -3; //Point is empty
+    else if(amount.contains("|||", Qt::CaseInsensitive)){
+        return -3; //amount contain Invalid symbol
+    }
+    else if(amount == ""){
+        return -4; //amount is empty
     }
     else if(!validate){
-        return -4; //Point is not number
+        return -5; //amount is not number
     }
-    else if(warnType == ""){
-        return -5; //Type is empty
+    else if(type == ""){
+        return -6; //type is empty
     }
 
     return 1;

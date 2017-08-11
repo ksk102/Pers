@@ -69,6 +69,7 @@ void add_recur::on_btn_confirm_clicked()
 
 bool add_recur::preCheckUserInput(QString name, QString amount, QString type)
 {
+    commonRecur = new common_recur();
     int returnInt = commonRecur->preCheckUserInput(name, amount, type);
 
     //if returnInt is

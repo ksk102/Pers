@@ -36,7 +36,7 @@
     </property>
     <layout class="QGridLayout" name="gridLayout">
      <item row="3" column="1" colspan="2">
-      <widget class="QComboBox" name="list_cat">
+      <widget class="QComboBox" name="lst_cat">
        <item>
         <property name="text">
          <string>&lt;Select one&gt;</string>
@@ -58,14 +58,14 @@
         </font>
        </property>
        <property name="text">
-        <string>Warning Name:</string>
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Warning Name:&lt;label style=&quot;color:red;&quot;&gt;*&lt;/label&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
       </widget>
      </item>
      <item row="2" column="0">
       <widget class="QLabel" name="lbl_type">
        <property name="text">
-        <string>Warning Type:</string>
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Warning Type:&lt;label style=&quot;color:red;&quot;&gt;*&lt;/label&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
       </widget>
      </item>
@@ -77,12 +77,12 @@
         </font>
        </property>
        <property name="text">
-        <string>Warning Point (RM):</string>
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Warning Point (RM):&lt;label style=&quot;color:red;&quot;&gt;*&lt;/label&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
       </widget>
      </item>
      <item row="2" column="1">
-      <widget class="QComboBox" name="list_warnType">
+      <widget class="QComboBox" name="lst_warnType">
        <item>
         <property name="text">
          <string>&lt;Select one&gt;</string>
@@ -121,7 +121,7 @@
       <widget class="QComboBox" name="lst_daytype">
        <item>
         <property name="text">
-         <string>&lt;Select one&gt;</string>
+         <string>Everyday</string>
         </property>
        </item>
        <item>
@@ -141,10 +141,10 @@
     <zorder>txt_name</zorder>
     <zorder>lbl_point</zorder>
     <zorder>lbl_type</zorder>
-    <zorder>list_warnType</zorder>
+    <zorder>lst_warnType</zorder>
     <zorder>txt_point</zorder>
     <zorder>lbl_cat</zorder>
-    <zorder>list_cat</zorder>
+    <zorder>lst_cat</zorder>
     <zorder>lst_daytype</zorder>
    </widget>
    <widget class="QWidget" name="layoutWidget_2">
@@ -178,9 +178,9 @@
  <tabstops>
   <tabstop>txt_name</tabstop>
   <tabstop>txt_point</tabstop>
-  <tabstop>list_warnType</tabstop>
+  <tabstop>lst_warnType</tabstop>
   <tabstop>lst_daytype</tabstop>
-  <tabstop>list_cat</tabstop>
+  <tabstop>lst_cat</tabstop>
   <tabstop>btn_confirm</tabstop>
   <tabstop>btn_cancel</tabstop>
  </tabstops>

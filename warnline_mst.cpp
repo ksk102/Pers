@@ -10,37 +10,25 @@ warnLine_mst::warnLine_mst(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    if(!(retrieveCategory())){
-         QMessageBox::critical(this,"unsuccessful","Unable to retrieve category");
-    }
+    comGen = new common_general();
+    comGen->setFileName("warnline.txt");
+    comGen->setTmpFileName("warnline_tmp.txt");
 
-    QString warnType = ui->list_warnType->currentText();
+    retrieveCategory(); //retrieve category from text file
 
-    comWarn = new common_warn();
-    warnType = comWarn->listBoxIsEmpty(warnType);
+    /*get searchString from userinputs*/
+    setSearchString();
 
-    searchString = ui->txt_name->text();
-    searchString = searchString + "|||||" + ui->txt_pointFrom->text();
-    searchString = searchString + "|||||" + ui->txt_pointTo->text();
-    searchString = searchString + "|||||" + warnType;
-    searchString = searchString + "|||||" + QString::number(ui->list_cat->currentData().toInt());
+    setColumnInfo();
 
-    ui->tw_warnList->setColumnCount(6); //set the listing column number
-    ui->tw_warnList->setHeaderLabels(QStringList() << "Warning ID" << "Warning Name" << "Warning Point (RM)" << "Warning Type" << "Warning Day Type" << "Category"); //set the columns header name
-
-    ui->tw_warnList->setColumnWidth(0, 70);
-    ui->tw_warnList->setColumnWidth(1, 270);
-    ui->tw_warnList->setColumnWidth(2, 120);
-    ui->tw_warnList->setColumnWidth(3, 90);
-    ui->tw_warnList->setColumnWidth(4, 120);
-    ui->tw_warnList->setColumnWidth(5, 100);
-
-    retrieveWarningList(searchString); //show the listing
+    //show the listing
+    retrieveWarningList();
 }
 
 warnLine_mst::~warnLine_mst()
 {
     delete ui;
+    delete comGen;
 }
 
 void warnLine_mst::on_btn_add_clicked()
@@ -49,17 +37,15 @@ void warnLine_mst::on_btn_add_clicked()
     addWarn->setModal(true);
     addWarn->exec();
 
-    retrieveWarningList(searchString); //show the listing
+    retrieveWarningList(); //show the listing
 }
 
 void warnLine_mst::showListing(QString warnId, QString warnName, QString warnPoint, QString warnType, QString warnDayType, QString warnCat)
 {
-    gen = new general();
-
     QString warnCatName = "";
 
     if(warnCat != "0"){
-        warnCatName = gen->convertIdName("category.txt", warnCat);
+        warnCatName = comGen->convertIdName("category.txt", warnCat);
     }
 
 
@@ -73,11 +59,11 @@ void warnLine_mst::showListing(QString warnId, QString warnName, QString warnPoi
     itm->setText(5, warnCatName); //column, data
 }
 
-void warnLine_mst::retrieveWarningList(QString searchString)
+void warnLine_mst::retrieveWarningList()
 {
     ui->tw_warnList->clear(); //clear the listing
 
-    QStringList recordsList = retrieveRecords("warnline.txt", searchString); //call the method to get the records from text file
+    QStringList recordsList = retrieveRecords(); //call the method to get the records from text file
 
     QStringList warnRecord;
     QString warnId;
@@ -117,7 +103,7 @@ void warnLine_mst::on_btn_edit_clicked()
     editWarn->setModal(true);
     editWarn->exec();
 
-    retrieveWarningList(searchString); //show the listing
+    retrieveWarningList(); //show the listing
 }
 
 void warnLine_mst::on_btn_delete_clicked()
@@ -136,21 +122,15 @@ void warnLine_mst::on_btn_delete_clicked()
     int reply = QMessageBox::question(this,"Delete Record","Are you sure want to delete " +currentText+"?", QMessageBox::Yes|QMessageBox::No);
 
     if(reply == QMessageBox::Yes){
-
-        gen = new general();
-        if(!gen->deleteRecord("warnline",currentId)){
-            QMessageBox::critical(this,"unsuccessful","Error occur while deleting the data");
-        }
-
-        retrieveWarningList(searchString);
-
+        comGen->deleteRecord(currentId);
+        retrieveWarningList();
     }
 }
 
-bool warnLine_mst::retrieveCategory()
+void warnLine_mst::retrieveCategory()
 {
-    gen = new general();
-    QStringList recordsList = gen->retrieveRecords("category.txt", ""); //call the method to get the records from text file
+    //call the method to get the records from text file
+    QStringList recordsList = comGen->retrieveRecords("category.txt", "");
 
     QStringList catRecord;
     QString catId;
@@ -161,48 +141,56 @@ bool warnLine_mst::retrieveCategory()
         catId = catRecord[0];
         catName = catRecord[1];
 
-        showCatListing(catId, catName);
+        ui->lst_cat->addItem(catName, catId);
     }
-
-    return true;
 }
 
-void warnLine_mst::showCatListing(QString catId, QString catName)
+void warnLine_mst::setSearchString()
 {
-    ui->list_cat->addItem(catName, catId);
+     QString warnType = ui->lst_warnType->currentText();
+
+    warnType = comGen->listBoxIsEmpty(warnType);
+
+    searchString = QStringList();
+
+    searchString << ui->txt_name->text() <<ui->txt_pointFrom->text() << ui->txt_pointTo->text() << warnType << QString::number(ui->lst_cat->currentData().toInt());
+}
+
+void warnLine_mst::setColumnInfo()
+{
+    ui->tw_warnList->setColumnCount(6); //set the listing column number
+    ui->tw_warnList->setHeaderLabels(QStringList() << "Warning ID" << "Warning Name" << "Warning Point (RM)" << "Warning Type" << "Warning Day Type" << "Category"); //set the columns header name
+
+    ui->tw_warnList->setColumnWidth(0, 70);
+    ui->tw_warnList->setColumnWidth(1, 270);
+    ui->tw_warnList->setColumnWidth(2, 120);
+    ui->tw_warnList->setColumnWidth(3, 90);
+    ui->tw_warnList->setColumnWidth(4, 120);
+    ui->tw_warnList->setColumnWidth(5, 100);
 }
 
 void warnLine_mst::on_btn_search_clicked()
 {
-    QString warnType = ui->list_warnType->currentText();
-
-    comWarn = new common_warn();
-    warnType = comWarn->listBoxIsEmpty(warnType);
-
-    searchString = ui->txt_name->text();
-    searchString = searchString + "|||||" + ui->txt_pointFrom->text();
-    searchString = searchString + "|||||" + ui->txt_pointTo->text();
-    searchString = searchString + "|||||" + warnType;
-    searchString = searchString + "|||||" + QString::number(ui->list_cat->currentData().toInt());
-
-    retrieveWarningList(searchString);
+    setSearchString();
+    retrieveWarningList();
 }
 
-QStringList warnLine_mst::retrieveRecords(QString filename, QString searchString)
+QStringList warnLine_mst::retrieveRecords()
 {
-    QStringList searchStringList = searchString.split("|||||");
-    QString warnName = searchStringList[0];
-    QString warnPointFrom = searchStringList[1];
-    QString warnPointTo = searchStringList[2];
-    QString warnType = searchStringList[3];
-    QString warnCat = searchStringList[4];
+    QString filename = comGen->getFileName();
+
+    QString warnName = searchString[0];
+    double warnPointFrom = searchString[1].toDouble();
+    double warnPointTo = searchString[2].toDouble();
+    QString warnType = searchString[3];
+    QString warnCat = searchString[4];
 
     //open file
     QFile file(filename);
 
     QString line;
     QString recordName;
-    QString recordPoint;
+    double recordPoint;
     QString recordType;
     QString recordDayType;
     QString recordCat;
@@ -215,10 +203,7 @@ QStringList warnLine_mst::retrieveRecords(QString filename, QString searchString
     }
 
     //open file for read only
-    if(!file.open(QFile::ReadOnly | QFile::Text))
-    {
-        return linesList;
-    }
+    file.open(QFile::ReadOnly | QFile::Text);
 
     //read the file line by line
     QTextStream in(&file);
@@ -228,14 +213,14 @@ QStringList warnLine_mst::retrieveRecords(QString filename, QString searchString
 
        lineData = line.split("|||||");
        recordName = lineData[1];
-       recordPoint = lineData[2];
+       recordPoint = lineData[2].toDouble();
        recordType = lineData[3];
        recordDayType = lineData[4];
        recordCat = lineData[5];
 
        if((warnName == "" || recordName.contains(warnName, Qt::CaseInsensitive))
-           && (warnPointFrom == "" || warnPointFrom <= recordPoint)
-           && (warnPointTo == "" || warnPointTo >= recordPoint)
+           && (warnPointFrom == 0 || warnPointFrom <= recordPoint)
+           && (warnPointTo == 0 || warnPointTo >= recordPoint)
            && (warnType == "" || warnType == recordType)
            && (warnCat == "0" || warnCat == recordCat)){
            linesList << line;
@@ -244,4 +229,9 @@ QStringList warnLine_mst::retrieveRecords(QString filename, QString searchString
     file.close();
 
     return linesList;
+}
+
+void warnLine_mst::on_tw_warnList_itemDoubleClicked(QTreeWidgetItem *item, int column)
+{
+    on_btn_edit_clicked();
 }

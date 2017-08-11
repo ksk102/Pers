@@ -84,7 +84,7 @@
       </widget>
      </item>
      <item row="3" column="2">
-      <widget class="QComboBox" name="list_warnType">
+      <widget class="QComboBox" name="lst_warnType">
        <item>
         <property name="text">
          <string>&lt;Select one&gt;</string>
@@ -132,7 +132,7 @@
       </widget>
      </item>
      <item row="4" column="2">
-      <widget class="QComboBox" name="list_cat">
+      <widget class="QComboBox" name="lst_cat">
        <item>
         <property name="text">
          <string>&lt;Select one&gt;</string>
@@ -172,7 +172,7 @@
      </property>
     </column>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>9</x>
@@ -211,8 +211,8 @@
   <tabstop>txt_name</tabstop>
   <tabstop>txt_pointFrom</tabstop>
   <tabstop>txt_pointTo</tabstop>
-  <tabstop>list_warnType</tabstop>
-  <tabstop>list_cat</tabstop>
+  <tabstop>lst_warnType</tabstop>
+  <tabstop>lst_cat</tabstop>
   <tabstop>btn_search</tabstop>
   <tabstop>btn_add</tabstop>
   <tabstop>btn_edit</tabstop>
