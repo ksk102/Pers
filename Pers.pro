@@ -40,7 +40,12 @@ SOURCES += \
     common_recur.cpp \
     common_general.cpp \
     recur_expenses_mst.cpp \
-    edit_recur.cpp
+    edit_recur.cpp \
+    add_expense.cpp \
+    common_expenses.cpp \
+    expenses_mst.cpp \
+    edit_expense.cpp \
+    recurring_expenses.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -55,7 +60,12 @@ HEADERS += \
     common_recur.h \
     common_general.h \
     recur_expenses_mst.h \
-    edit_recur.h
+    edit_recur.h \
+    add_expense.h \
+    common_expenses.h \
+    expenses_mst.h \
+    edit_expense.h \
+    recurring_expenses.h
 
 FORMS += \
         mainwindow.ui \
@@ -67,4 +77,7 @@ FORMS += \
     edit_warn.ui \
     add_recur.ui \
     recur_expenses_mst.ui \
-    edit_recur.ui
+    edit_recur.ui \
+    add_expense.ui \
+    expenses_mst.ui \
+    edit_expense.ui

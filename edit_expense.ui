@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>edit_expense</class>
+ <widget class="QDialog" name="edit_expense">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>640</width>
+    <height>420</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Edit Expense - Pers</string>
+  </property>
+  <widget class="QGroupBox" name="gb_addNew">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>10</y>
+     <width>621</width>
+     <height>401</height>
+    </rect>
+   </property>
+   <property name="title">
+    <string>Edit Expense</string>
+   </property>
+   <widget class="QWidget" name="layoutWidget_2">
+    <property name="geometry">
+     <rect>
+      <x>450</x>
+      <y>360</y>
+      <width>158</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QPushButton" name="btn_confirm">
+       <property name="text">
+        <string>OK</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btn_cancel">
+       <property name="text">
+        <string>Cancel</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="layoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>11</x>
+      <y>24</y>
+      <width>601</width>
+      <height>321</height>
+     </rect>
+    </property>
+    <layout class="QGridLayout" name="gridLayout">
+     <item row="0" column="3">
+      <widget class="QComboBox" name="lst_year"/>
+     </item>
+     <item row="1" column="3">
+      <widget class="QComboBox" name="lst_AP"/>
+     </item>
+     <item row="0" column="0">
+      <widget class="QLabel" name="lbl_type">
+       <property name="text">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Date  (dd/MM/yyyy) :&lt;label style=&quot;color:red;&quot;&gt;*&lt;/label&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="0">
+      <widget class="QLabel" name="lbl_name">
+       <property name="font">
+        <font>
+         <pointsize>8</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Expense Name:&lt;label style=&quot;color:red;&quot;&gt;*&lt;/label&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="0">
+      <widget class="QLabel" name="lbl_cat">
+       <property name="text">
+        <string>Category:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="0">
+      <widget class="QLabel" name="lbl_amount">
+       <property name="font">
+        <font>
+         <pointsize>8</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Expense Amount (RM):&lt;label style=&quot;color:red;&quot;&gt;*&lt;/label&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QComboBox" name="lst_hour"/>
+     </item>
+     <item row="0" column="2">
+      <widget class="QComboBox" name="lst_month"/>
+     </item>
+     <item row="3" column="1" colspan="4">
+      <widget class="QLineEdit" name="txt_amount"/>
+     </item>
+     <item row="2" column="1" colspan="4">
+      <widget class="QLineEdit" name="txt_name"/>
+     </item>
+     <item row="5" column="0">
+      <widget class="QLabel" name="lbl_other">
+       <property name="text">
+        <string>Description:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QComboBox" name="lst_day"/>
+     </item>
+     <item row="4" column="1" colspan="4">
+      <widget class="QComboBox" name="lst_cat">
+       <item>
+        <property name="text">
+         <string>&lt;Select one&gt;</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+     <item row="1" column="2">
+      <widget class="QComboBox" name="lst_minute"/>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="lbl_time">
+       <property name="text">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Time (hh:mm AP) :&lt;label style=&quot;color:red;&quot;&gt;*&lt;/label&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="1" colspan="4">
+      <widget class="QTextEdit" name="txt_other">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>150</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+ </widget>
+ <tabstops>
+  <tabstop>lst_day</tabstop>
+  <tabstop>lst_month</tabstop>
+  <tabstop>lst_year</tabstop>
+  <tabstop>lst_hour</tabstop>
+  <tabstop>lst_minute</tabstop>
+  <tabstop>lst_AP</tabstop>
+  <tabstop>txt_name</tabstop>
+  <tabstop>txt_amount</tabstop>
+  <tabstop>lst_cat</tabstop>
+  <tabstop>txt_other</tabstop>
+  <tabstop>btn_confirm</tabstop>
+  <tabstop>btn_cancel</tabstop>
+ </tabstops>
+ <resources/>
+ <connections/>
+</ui>
