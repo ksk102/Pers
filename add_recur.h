@@ -32,6 +32,7 @@ private:
     bool preCheckUserInput(QString, QString, QString); //check user input
     void retrieveCategory(); //retrieve category from text file
     void showHideDayType(QString); //to show or hide day type listbox
+    QStringList generateTodayDate(QString); //get today's date
 };
 
 #endif // ADD_RECUR_H

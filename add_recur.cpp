@@ -2,6 +2,7 @@
 #include "ui_add_recur.h"
 #include <QMessageBox>
 #include <QStringList>
+#include <QDate>
 
 add_recur::add_recur(QWidget *parent) :
     QDialog(parent),
@@ -48,15 +49,43 @@ void add_recur::on_btn_confirm_clicked()
         return;
     }
 
-    //data to save into new file
+    //data to save into recurring file
     QStringList passData;
     passData << recurName << recurAmt << recurCatId << recurType << recurDayType;
+
+    //add into expenses
+    //generate date
+    QStringList todayList = generateTodayDate(recurType);
+    QString dateString = todayList[0];
+    QString todayDate = todayList[1];
+
+    //data to write into expenses file
+    QStringList passExpData;
+    passExpData << recurName + " @ " +  dateString << recurAmt << recurCatId << "" << todayDate << "1200AM";
 
     //write new record into file
     //-1 parameter here is to by editting function,
     //since this is add new,
     //so use -1 to indicate it is not from edit
     if(comGen->writeNewRecord(passData, "-1")){
+
+        //write into expenses file
+        QDate date = QDate::currentDate();
+
+        if(recurDayType == "Every Weekday"){
+            if(date.dayOfWeek() != 6 && date.dayOfWeek() != 7){
+                comGen->writeIntoFile(passExpData, "expenses.txt");
+            }
+        }
+        else if(recurDayType == "Every Weekend"){
+            if(date.dayOfWeek() == 6 || date.dayOfWeek() == 7){
+               comGen->writeIntoFile(passExpData, "expenses.txt");
+            }
+        }
+        else{
+            comGen->writeIntoFile(passExpData, "expenses.txt");
+        }
+
         QMessageBox::information(this,"Sucessful","\""+recurName+"\" has been sucessfully added into system.");
         this->close();
     }
@@ -160,6 +189,34 @@ void add_recur::showHideDayType(QString type)
         ui->lst_daytype->setCurrentIndex(0);
         ui->lst_daytype->hide();
     }
+}
+
+QStringList add_recur::generateTodayDate(QString recurType)
+{
+    //generate date format
+    QDate currentDate = QDate::currentDate();
+    QString year = currentDate.toString("yyyy");
+    QString month = currentDate.toString("MM");
+    QString day = currentDate.toString("dd");
+
+    QString todayString = year + month + day;
+
+    QStringList returnList;
+    QString dateString;
+
+    if(recurType == "Daily"){
+        dateString = todayString;
+    }
+    else if(recurType == "Monthly"){
+        QString month = currentDate.toString("MMMM");
+        dateString = month + " " + year;
+    }
+    else{
+        dateString = year;
+    }
+
+    returnList << dateString << todayString;
+    return returnList;
 }
 
 void add_recur::on_lst_recurType_currentIndexChanged(const QString &arg1)
