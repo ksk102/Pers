@@ -24,8 +24,8 @@ private:
     QStringList todayDate(); //get today's date
     QStringList retrieveRecurExpenses(QString); //get recurring expenses from file
     void addDailyRecurExpenses(int, int, int, int, int, int); //add daily recurring expenses
-    void addDailyRecurExpensesSubMonth(QString, QString, QString, int, int, int, int, int, int, int, int); //sub function for addDailyRecurExpenses
-    void addDailyRecurExpensesSubMonthSubDay(int, int, int, QString, QString, QString); //sub function for addDailyRecurExpensesSubMonth
+    void addDailyRecurExpensesSubMonth(QString, QString, QString, int, int, int, int, int, int, int, int, QString); //sub function for addDailyRecurExpenses
+    void addDailyRecurExpensesSubMonthSubDay(QString, QString, QString, QString); //sub function for addDailyRecurExpensesSubMonth
     void identifyDayinMonth(int, QString); //identify the day in a month
 };
 

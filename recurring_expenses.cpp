@@ -169,6 +169,7 @@ void recurring_expenses::addDailyRecurExpenses(int lastday,int lastmonth, int la
         QString recurName = recurRecord[1];
         QString recurAmt = recurRecord[2];
         QString recurCat = recurRecord[3];
+        QString recurDayType = recurRecord[5];
 
         //loop from last login year till this year
         for(int y=lastyear;y<=todayyear;y++){
@@ -176,8 +177,8 @@ void recurring_expenses::addDailyRecurExpenses(int lastday,int lastmonth, int la
             //if last login year equal to current loop's year, start the month from last login month
             if(lastyear == y){
                 for(int m=lastmonth;m<=12;m++){
-                    addDailyRecurExpensesSubMonth(recurName, recurAmt, recurCat,
-                                                  lastmonth, todaymonth, lastday, todayday, lastyear, todayyear, y, m);
+                    addDailyRecurExpensesSubMonth(recurName, recurAmt, recurCat,lastmonth, todaymonth,
+                                                  lastday, todayday, lastyear, todayyear, y, m, recurDayType);
 
                     //if this month and year equal to looping's month and year, end the loop
                     if(todaymonth == m && y == todayyear){
@@ -187,8 +188,8 @@ void recurring_expenses::addDailyRecurExpenses(int lastday,int lastmonth, int la
             }
             else{
                 for(int m=1;m<=12;m++){
-                    addDailyRecurExpensesSubMonth(recurName, recurAmt, recurCat,
-                                                  lastmonth, todaymonth, lastday, todayday, lastyear, todayyear, y, m);
+                    addDailyRecurExpensesSubMonth(recurName, recurAmt, recurCat,lastmonth, todaymonth,
+                                                  lastday, todayday, lastyear, todayyear, y, m, recurDayType);
 
                     if(todaymonth == m && y == todayyear){
                         break;
@@ -199,7 +200,7 @@ void recurring_expenses::addDailyRecurExpenses(int lastday,int lastmonth, int la
     }
 }
 
-void recurring_expenses::addDailyRecurExpensesSubMonth(QString recurName, QString recurAmt, QString recurCat, int lastmonth, int todaymonth, int lastday, int todayday, int lastyear, int todayyear, int y, int m)
+void recurring_expenses::addDailyRecurExpensesSubMonth(QString recurName, QString recurAmt, QString recurCat, int lastmonth, int todaymonth, int lastday, int todayday, int lastyear, int todayyear, int y, int m, QString recurDayType)
 {
     //add an 0 in front of the months less than 10
     QString runningMonth = (m<10) ? "0"+QString::number(m) : QString::number(m);
@@ -210,7 +211,26 @@ void recurring_expenses::addDailyRecurExpensesSubMonth(QString recurName, QStrin
     //start the day from last login day
     if(lastyear == y && lastmonth == m){
         for(int d=lastday+1;d<=day_in_month;d++){
-            addDailyRecurExpensesSubMonthSubDay(d, m, y, recurName, recurAmt, recurCat);
+
+            //regenerate date format
+            QString runningday = (d<10) ? "0"+QString::number(d) : QString::number(d);
+            QString runningMonth = (m<10) ? "0"+QString::number(m) : QString::number(m);
+            QString runningdate = QString::number(y) + runningMonth + runningday;
+            QDate loopingDate = QDate::fromString(runningdate,"yyyyMMdd");
+
+            if(recurDayType == "Every Weekday"){
+                if(loopingDate.dayOfWeek() != 6 && loopingDate.dayOfWeek() != 7){
+                    addDailyRecurExpensesSubMonthSubDay(runningdate, recurName, recurAmt, recurCat);
+                }
+            }
+            else if(recurDayType == "Every Weekend"){
+                if(loopingDate.dayOfWeek() == 6 || loopingDate.dayOfWeek() == 7){
+                    addDailyRecurExpensesSubMonthSubDay(runningdate, recurName, recurAmt, recurCat);
+                }
+            }
+            else{
+                addDailyRecurExpensesSubMonthSubDay(runningdate, recurName, recurAmt, recurCat);
+            }
 
             //if this day, month and year equal to looping's day, month and year, end the loop
             if(todaymonth == m && d == todayday && y == todayyear){
@@ -220,7 +240,26 @@ void recurring_expenses::addDailyRecurExpensesSubMonth(QString recurName, QStrin
     }
     else{
         for(int d=1;d<=day_in_month;d++){
-            addDailyRecurExpensesSubMonthSubDay(d, m, y, recurName, recurAmt, recurCat);
+
+            //regenerate date format
+            QString runningday = (d<10) ? "0"+QString::number(d) : QString::number(d);
+            QString runningMonth = (m<10) ? "0"+QString::number(m) : QString::number(m);
+            QString runningdate = QString::number(y) + runningMonth + runningday;
+            QDate loopingDate = QDate::fromString(runningdate,"yyyyMMdd");
+
+            if(recurDayType == "Every Weekday"){
+                if(loopingDate.dayOfWeek() != 6 && loopingDate.dayOfWeek() != 7){
+                    addDailyRecurExpensesSubMonthSubDay(runningdate, recurName, recurAmt, recurCat);
+                }
+            }
+            else if(recurDayType == "Every Weekend"){
+                if(loopingDate.dayOfWeek() == 6 || loopingDate.dayOfWeek() == 7){
+                    addDailyRecurExpensesSubMonthSubDay(runningdate, recurName, recurAmt, recurCat);
+                }
+            }
+            else{
+                addDailyRecurExpensesSubMonthSubDay(runningdate, recurName, recurAmt, recurCat);
+            }
 
             if(todaymonth == m && d == todayday && y == todayyear){
                 break;
@@ -229,15 +268,10 @@ void recurring_expenses::addDailyRecurExpensesSubMonth(QString recurName, QStrin
     }
 }
 
-void recurring_expenses::addDailyRecurExpensesSubMonthSubDay(int d, int m, int y, QString recurName,
+void recurring_expenses::addDailyRecurExpensesSubMonthSubDay(QString runningdate, QString recurName,
                                                              QString recurAmt, QString recurCat)
 {
     QStringList passData;
-
-    //regenerate date format
-    QString runningday = (d<10) ? "0"+QString::number(d) : QString::number(d);
-    QString runningMonth = (m<10) ? "0"+QString::number(m) : QString::number(m);
-    QString runningdate = QString::number(y) + runningMonth + runningday;
 
     //data to write into file
     passData << recurName + " @ " +  runningdate << recurAmt << recurCat << "" << runningdate << "1200AM";
