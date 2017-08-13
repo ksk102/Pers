@@ -16,8 +16,8 @@ public:
 
     bool writeNewRecord(QStringList, QString); //write new record into file
     bool checkNameExist(QString, QString); //check if name already exists
-    void writeIntoFile(QStringList userInput); //write user input data into file
-    int generateNewId(); //generate new id to add into file
+    void writeIntoFile(QStringList userInput, QString); //write user input data into file
+    int generateNewId(QString); //generate new id to add into file
     QStringList retrieveRecords(QString, QString); //retrieve records from textfile
     QString listBoxIsEmpty(QString); //return "" if listbox is empty
     bool DayTypeString(QString); //return false if type selection is not day/daily

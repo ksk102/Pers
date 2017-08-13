@@ -33,7 +33,7 @@ bool common_general::writeNewRecord(QStringList userInput, QString curId)
     if(checkNameExist(recordName,curId)){
 
         if(curId == "-1"){
-            writeIntoFile(userInput);
+            writeIntoFile(userInput, "");
         }
         else{
             editIntoFile(userInput, curId);
@@ -90,13 +90,16 @@ bool common_general::checkNameExist(QString userinput, QString curId)
     return true; //name doesn't exists
 }
 
-void common_general::writeIntoFile(QStringList userInput)
+void common_general::writeIntoFile(QStringList userInput, QString filename)
 {
+    if(filename == ""){
+        filename = this->getFileName();
+    }
     //open file
-    QFile file(this->getFileName());
+    QFile file(filename);
     file.open(QFile::Append | QFile::Text);
 
-    int new_id = generateNewId();
+    int new_id = generateNewId(filename);
 
     QTextStream out(&file);
 
@@ -110,9 +113,9 @@ void common_general::writeIntoFile(QStringList userInput)
     file.close();
 }
 
-int common_general::generateNewId()
+int common_general::generateNewId(QString filename)
 {
-    QFile file(this->getFileName());
+    QFile file(filename);
 
     if(file.exists()){
 
