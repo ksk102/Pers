@@ -10,6 +10,7 @@
 #include "add_expense.h"
 #include "expenses_mst.h"
 #include "recurring_expenses.h"
+#include "spending_limit.h"
 
 namespace Ui {
 class MainWindow;
@@ -43,9 +44,14 @@ private:
     add_expense *addExp;
     expenses_mst *expMst;
     recurring_expenses *recurring;
+    spending_limit *spendLimit;
 
-    void recordLoginDate(); //record the date which the user's last login into system
-    void writeLoginDate(QString);
+    QString getTodayDay();
+    QString getTodayMonth();
+    QString getTodayYear();
+    void showTodayExpenses();
+    void showExceedWarning();
+
 };
 
 #endif // MAINWINDOW_H

@@ -103,7 +103,7 @@ QStringList spending_limit::checkWarnLine()
 
             double exceed = total_in_life - warnAmt;
             returnString << "Warning! " + warnName +
-                            "\nYou have spended RM" + QString::number(exceed, 'f', 2) +
+                            "\n-You have spended RM" + QString::number(exceed, 'f', 2) +
                             " more than the limit (RM" + QString::number(warnAmt, 'f', 2) + ") you set";
         }
 
@@ -112,7 +112,7 @@ QStringList spending_limit::checkWarnLine()
 
             double exceed = total_in_life_cat - warnAmt;
             returnString << "Warning! " + warnName +
-                            "\nYou have spended RM" + QString::number(exceed, 'f', 2) +
+                            "\n-You have spended RM" + QString::number(exceed, 'f', 2) +
                             " more than the limit (RM" + QString::number(warnAmt, 'f', 2) +
                             ") you set for the category - " + comGen->convertIdName("category.txt", warnCatId);
         }
@@ -120,7 +120,7 @@ QStringList spending_limit::checkWarnLine()
         if(total_in_year >= warnAmt && warnType == "Year" && warnCatId == "0"){
             double exceed = total_in_year - warnAmt;
             returnString << "Warning! " + warnName +
-                            "\nYou have spended RM" + QString::number(exceed, 'f', 2) +
+                            "\n-You have spended RM" + QString::number(exceed, 'f', 2) +
                             " more than the limit (RM" + QString::number(warnAmt, 'f', 2) + ") you set for a year";
         }
 
@@ -129,7 +129,7 @@ QStringList spending_limit::checkWarnLine()
 
             double exceed = total_in_year_cat - warnAmt;
             returnString << "Warning! " + warnName +
-                            "\nYou have spended RM" + QString::number(exceed, 'f', 2) +
+                            "\n-You have spended RM" + QString::number(exceed, 'f', 2) +
                             " more than the limit (RM" + QString::number(warnAmt, 'f', 2) +
                             ") you set for a year for the category - " + comGen->convertIdName("category.txt", warnCatId);
         }
@@ -137,7 +137,7 @@ QStringList spending_limit::checkWarnLine()
         if(total_in_month >= warnAmt && warnType == "Month" && warnCatId == "0"){
             double exceed = total_in_month - warnAmt;
             returnString << "Warning! " + warnName +
-                            "\nYou have spended RM" + QString::number(exceed, 'f', 2) +
+                            "\n-You have spended RM" + QString::number(exceed, 'f', 2) +
                             " more than the limit (RM" + QString::number(warnAmt, 'f', 2) + ") you set for a month";
         }
 
@@ -146,7 +146,7 @@ QStringList spending_limit::checkWarnLine()
 
             double exceed = total_in_month_cat - warnAmt;
             returnString << "Warning! " + warnName +
-                            "\nYou have spended RM" + QString::number(exceed, 'f', 2) +
+                            "\n-You have spended RM" + QString::number(exceed, 'f', 2) +
                             " more than the limit (RM" + QString::number(warnAmt, 'f', 2) +
                             ") you set for a month for the category - " + comGen->convertIdName("category.txt", warnCatId);
         }
@@ -154,7 +154,7 @@ QStringList spending_limit::checkWarnLine()
         if(total_in_day >= warnAmt && warnType == "Day" && warnCatId == "0"){
             double exceed = total_in_day - warnAmt;
             returnString << "Warning! " + warnName +
-                            "\nYou have spended RM" + QString::number(exceed, 'f', 2) +
+                            "\n-You have spended RM" + QString::number(exceed, 'f', 2) +
                             " more than the limit (RM" + QString::number(warnAmt, 'f', 2) + ") you set for a day";
         }
 
@@ -163,7 +163,7 @@ QStringList spending_limit::checkWarnLine()
 
             double exceed = total_in_day_cat - warnAmt;
             returnString << "Warning! " + warnName +
-                            "\nYou have spended RM" + QString::number(exceed, 'f', 2) +
+                            "\n-You have spended RM" + QString::number(exceed, 'f', 2) +
                             " more than the limit (RM" + QString::number(warnAmt, 'f', 2) +
                             ") you set for a day for the category - " + comGen->convertIdName("category.txt", warnCatId);
         }
