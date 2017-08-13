@@ -2,9 +2,10 @@
 #define CATEGORY_MST_H
 
 #include <QDialog>
+#include <QTreeWidget>
 #include "add_cat.h"
 #include "edit_cat.h"
-#include "general.h"
+#include "common_general.h"
 
 namespace Ui {
 class Category_mst;
@@ -28,16 +29,19 @@ private slots:
 
     void on_btn_search_clicked();
 
+    void on_tw_catList_itemDoubleClicked(QTreeWidgetItem *item, int column);
+
 private:
     QString searchString;
 
     Ui::Category_mst *ui;
     add_cat *addCat;
     edit_cat *editCat;
-    general *gen;
+    common_general *comGen;
 
     void showListing(QString, QString); //show listing on the treewidget
-    void retrieveCategory(QString); //retrieve records from file
+    void retrieveCategory(); //retrieve records from file
+    void setColumnInfo();
 };
 
 #endif // CATEGORY_MST_H

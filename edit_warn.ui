@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>add_warn</class>
- <widget class="QDialog" name="add_warn">
+ <class>edit_warn</class>
+ <widget class="QDialog" name="edit_warn">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -23,7 +23,7 @@
     </rect>
    </property>
    <property name="title">
-    <string>Add New Warning Point</string>
+    <string>Edit Warning Point</string>
    </property>
    <widget class="QWidget" name="layoutWidget">
     <property name="geometry">

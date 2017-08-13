@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>add_warn</class>
- <widget class="QDialog" name="add_warn">
+ <class>edit_recur</class>
+ <widget class="QDialog" name="edit_recur">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Add New Warning Point - Pers</string>
+   <string>Edit Recurring Expense - Pers</string>
   </property>
   <widget class="QGroupBox" name="gb_addNew">
    <property name="geometry">
@@ -23,7 +23,7 @@
     </rect>
    </property>
    <property name="title">
-    <string>Add New Warning Point</string>
+    <string>Edit Recurring Expense</string>
    </property>
    <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
@@ -35,17 +35,15 @@
      </rect>
     </property>
     <layout class="QGridLayout" name="gridLayout">
-     <item row="3" column="1" colspan="2">
-      <widget class="QComboBox" name="lst_cat">
-       <item>
-        <property name="text">
-         <string>&lt;Select one&gt;</string>
-        </property>
-       </item>
+     <item row="3" column="0">
+      <widget class="QLabel" name="lbl_type">
+       <property name="text">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Recurring Type:&lt;label style=&quot;color:red;&quot;&gt;*&lt;/label&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
       </widget>
      </item>
      <item row="1" column="1" colspan="2">
-      <widget class="QLineEdit" name="txt_point"/>
+      <widget class="QLineEdit" name="txt_amount"/>
      </item>
      <item row="0" column="1" colspan="2">
       <widget class="QLineEdit" name="txt_name"/>
@@ -58,38 +56,12 @@
         </font>
        </property>
        <property name="text">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Warning Name:&lt;label style=&quot;color:red;&quot;&gt;*&lt;/label&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Expense Name:&lt;label style=&quot;color:red;&quot;&gt;*&lt;/label&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
       </widget>
      </item>
-     <item row="2" column="0">
-      <widget class="QLabel" name="lbl_type">
-       <property name="text">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Warning Type:&lt;label style=&quot;color:red;&quot;&gt;*&lt;/label&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="0">
-      <widget class="QLabel" name="lbl_point">
-       <property name="font">
-        <font>
-         <pointsize>8</pointsize>
-        </font>
-       </property>
-       <property name="text">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Warning Point (RM):&lt;label style=&quot;color:red;&quot;&gt;*&lt;/label&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-       </property>
-      </widget>
-     </item>
-     <item row="3" column="0">
-      <widget class="QLabel" name="lbl_cat">
-       <property name="text">
-        <string>Category</string>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="1" colspan="2">
-      <widget class="QComboBox" name="lst_warnType">
+     <item row="3" column="1">
+      <widget class="QComboBox" name="lst_recurType">
        <item>
         <property name="text">
          <string>&lt;Select one&gt;</string>
@@ -97,22 +69,64 @@
        </item>
        <item>
         <property name="text">
-         <string>Day</string>
+         <string>Daily</string>
         </property>
        </item>
        <item>
         <property name="text">
-         <string>Month</string>
+         <string>Monthly</string>
         </property>
        </item>
        <item>
         <property name="text">
-         <string>Year</string>
+         <string>Yearly</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="lbl_amount">
+       <property name="font">
+        <font>
+         <pointsize>8</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Expense Amount (RM):&lt;label style=&quot;color:red;&quot;&gt;*&lt;/label&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="2">
+      <widget class="QComboBox" name="lst_daytype">
+       <item>
+        <property name="text">
+         <string>Every Day</string>
         </property>
        </item>
        <item>
         <property name="text">
-         <string>Lifetime</string>
+         <string>Every Weekday</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Every Weekend</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+     <item row="2" column="0">
+      <widget class="QLabel" name="lbl_cat">
+       <property name="text">
+        <string>Category</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1" colspan="2">
+      <widget class="QComboBox" name="lst_cat">
+       <item>
+        <property name="text">
+         <string>&lt;Select one&gt;</string>
         </property>
        </item>
       </widget>
@@ -120,10 +134,11 @@
     </layout>
     <zorder>lbl_name</zorder>
     <zorder>txt_name</zorder>
-    <zorder>lbl_point</zorder>
+    <zorder>lbl_amount</zorder>
     <zorder>lbl_type</zorder>
-    <zorder>lst_warnType</zorder>
-    <zorder>txt_point</zorder>
+    <zorder>lst_recurType</zorder>
+    <zorder>txt_amount</zorder>
+    <zorder>lst_daytype</zorder>
     <zorder>lbl_cat</zorder>
     <zorder>lst_cat</zorder>
    </widget>
@@ -157,9 +172,10 @@
  </widget>
  <tabstops>
   <tabstop>txt_name</tabstop>
-  <tabstop>txt_point</tabstop>
-  <tabstop>lst_warnType</tabstop>
+  <tabstop>txt_amount</tabstop>
   <tabstop>lst_cat</tabstop>
+  <tabstop>lst_recurType</tabstop>
+  <tabstop>lst_daytype</tabstop>
   <tabstop>btn_confirm</tabstop>
   <tabstop>btn_cancel</tabstop>
  </tabstops>

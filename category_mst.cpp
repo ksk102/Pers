@@ -11,16 +11,23 @@ Category_mst::Category_mst(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    comGen = new common_general();
+    comGen->setFileName("category.txt");
+    comGen->setTmpFileName("category_tmp.txt");
+
+    /*get searchString from userinputs*/
     searchString = ui->txt_name->text();
 
-    ui->tw_catList->setColumnCount(2); //set the listing column number
-    ui->tw_catList->setHeaderLabels(QStringList() << "Category ID" << "Category Name"); //set the columns header name
-    retrieveCategory(searchString); //show the listing
+    setColumnInfo();
+
+    //show the listing
+    retrieveCategory();
 }
 
 Category_mst::~Category_mst()
 {
     delete ui;
+    delete comGen;
 }
 
 void Category_mst::on_btn_addNew_clicked()
@@ -29,7 +36,7 @@ void Category_mst::on_btn_addNew_clicked()
     addCat->setModal(true);
     addCat->exec();
 
-    retrieveCategory(searchString); //show the listing
+    retrieveCategory(); //show the listing
 }
 
 void Category_mst::showListing(QString catId, QString catName)
@@ -39,12 +46,11 @@ void Category_mst::showListing(QString catId, QString catName)
     itm->setText(1, catName); //column, data
 }
 
-void Category_mst::retrieveCategory(QString searchString)
+void Category_mst::retrieveCategory()
 {
     ui->tw_catList->clear(); //clear the listing
 
-    gen = new general();
-    QStringList recordsList = gen->retrieveRecords("category.txt", searchString); //call the method to get the records from text file
+    QStringList recordsList = comGen->retrieveRecords("", searchString); //call the method to get the records from text file
 
     QStringList catRecord;
     QString catId;
@@ -57,6 +63,12 @@ void Category_mst::retrieveCategory(QString searchString)
 
         showListing(catId, catName);
     }
+}
+
+void Category_mst::setColumnInfo()
+{
+    ui->tw_catList->setColumnCount(2); //set the listing column number
+    ui->tw_catList->setHeaderLabels(QStringList() << "Category ID" << "Category Name"); //set the columns header name
 }
 
 void Category_mst::on_btn_edit_clicked()
@@ -76,7 +88,7 @@ void Category_mst::on_btn_edit_clicked()
     editCat->setModal(true);
     editCat->exec();
 
-    retrieveCategory(searchString); //show the listing
+    retrieveCategory(); //show the listing
 }
 
 void Category_mst::on_btn_delete_clicked()
@@ -95,19 +107,18 @@ void Category_mst::on_btn_delete_clicked()
     int reply = QMessageBox::question(this,"Delete Record","Are you sure want to delete " +currentText+"?", QMessageBox::Yes|QMessageBox::No);
 
     if(reply == QMessageBox::Yes){
-
-        gen = new general();
-        if(!gen->deleteRecord("category",currentId)){
-            QMessageBox::critical(this,"Unsucessful","Error occur while deleting the data");
-        }
-
-        retrieveCategory(searchString);
-
+        comGen->deleteRecord(currentId);
+        retrieveCategory();
     }
 }
 
 void Category_mst::on_btn_search_clicked()
 {
     searchString = ui->txt_name->text();
-    retrieveCategory(searchString);
+    retrieveCategory();
+}
+
+void Category_mst::on_tw_catList_itemDoubleClicked(QTreeWidgetItem *item, int column)
+{
+    on_btn_edit_clicked();
 }

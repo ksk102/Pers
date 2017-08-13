@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Personal Expenditure Record System</string>
+   <string>Personal Expenditure Record System - Pers</string>
   </property>
   <widget class="QWidget" name="centralWidget">
    <widget class="QWidget" name="verticalLayoutWidget">
@@ -20,7 +20,7 @@
       <x>10</x>
       <y>0</y>
       <width>181</width>
-      <height>581</height>
+      <height>571</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout">
@@ -120,32 +120,6 @@
          </property>
         </widget>
        </widget>
-       <widget class="QGroupBox" name="gb_report">
-        <property name="geometry">
-         <rect>
-          <x>10</x>
-          <y>360</y>
-          <width>161</width>
-          <height>91</height>
-         </rect>
-        </property>
-        <property name="title">
-         <string>Report</string>
-        </property>
-        <widget class="QPushButton" name="btn_report">
-         <property name="geometry">
-          <rect>
-           <x>10</x>
-           <y>30</y>
-           <width>141</width>
-           <height>41</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>Expenditure Summary</string>
-         </property>
-        </widget>
-       </widget>
       </widget>
      </item>
     </layout>
@@ -153,8 +127,8 @@
    <widget class="QLabel" name="lbl_title">
     <property name="geometry">
      <rect>
-      <x>370</x>
-      <y>10</y>
+      <x>210</x>
+      <y>0</y>
       <width>241</width>
       <height>101</height>
      </rect>
@@ -207,10 +181,292 @@
      <string>Pers</string>
     </property>
    </widget>
+   <widget class="QGroupBox" name="gb_warnLine">
+    <property name="geometry">
+     <rect>
+      <x>210</x>
+      <y>110</y>
+      <width>281</width>
+      <height>151</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>Over Expenses' Limit</string>
+    </property>
+    <widget class="QListWidget" name="lw_warnLine">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>20</y>
+       <width>261</width>
+       <height>121</height>
+      </rect>
+     </property>
+    </widget>
+    <zorder>scrollArea</zorder>
+    <zorder>lw_warnLine</zorder>
+   </widget>
+   <widget class="QGroupBox" name="gb_exp">
+    <property name="geometry">
+     <rect>
+      <x>210</x>
+      <y>270</y>
+      <width>281</width>
+      <height>151</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>Lifetime's Expenses</string>
+    </property>
+    <widget class="QWidget" name="layoutWidget_6">
+     <property name="geometry">
+      <rect>
+       <x>80</x>
+       <y>120</y>
+       <width>188</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout_7">
+      <item>
+       <widget class="QLabel" name="lbl_exp">
+        <property name="text">
+         <string>Total Expenses:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="txt_exp">
+        <property name="alignment">
+         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+        </property>
+        <property name="readOnly">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+    <widget class="QListWidget" name="lw_exp">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>20</y>
+       <width>261</width>
+       <height>91</height>
+      </rect>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QGroupBox" name="gb_monthExp">
+    <property name="geometry">
+     <rect>
+      <x>510</x>
+      <y>270</y>
+      <width>281</width>
+      <height>151</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>This Month's Expenses</string>
+    </property>
+    <widget class="QWidget" name="layoutWidget_2">
+     <property name="geometry">
+      <rect>
+       <x>80</x>
+       <y>120</y>
+       <width>188</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout_3">
+      <item>
+       <widget class="QLabel" name="lbl_monthExp">
+        <property name="text">
+         <string>Total Expenses:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="txt_monthExp">
+        <property name="alignment">
+         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+        </property>
+        <property name="readOnly">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+    <widget class="QListWidget" name="lw_monthExp">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>20</y>
+       <width>261</width>
+       <height>91</height>
+      </rect>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QGroupBox" name="gb_yearExp">
+    <property name="geometry">
+     <rect>
+      <x>510</x>
+      <y>430</y>
+      <width>281</width>
+      <height>151</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>This Year's Expenses</string>
+    </property>
+    <widget class="QWidget" name="layoutWidget_4">
+     <property name="geometry">
+      <rect>
+       <x>80</x>
+       <y>120</y>
+       <width>188</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout_5">
+      <item>
+       <widget class="QLabel" name="lbl_yearExp">
+        <property name="text">
+         <string>Total Expenses:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="txt_yearExp">
+        <property name="alignment">
+         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+        </property>
+        <property name="readOnly">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+    <widget class="QListWidget" name="lw_yearExp">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>20</y>
+       <width>261</width>
+       <height>91</height>
+      </rect>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QGroupBox" name="gb_todayExp">
+    <property name="geometry">
+     <rect>
+      <x>510</x>
+      <y>110</y>
+      <width>281</width>
+      <height>151</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>Today's Expenses</string>
+    </property>
+    <widget class="QListWidget" name="lw_todayExp">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>20</y>
+       <width>261</width>
+       <height>91</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QWidget" name="">
+     <property name="geometry">
+      <rect>
+       <x>80</x>
+       <y>120</y>
+       <width>188</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <widget class="QLabel" name="lbl_todayExp">
+        <property name="text">
+         <string>Total Expenses:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="txt_todayExp">
+        <property name="alignment">
+         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+        </property>
+        <property name="readOnly">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </widget>
+   <zorder>verticalLayoutWidget</zorder>
+   <zorder>lbl_title</zorder>
+   <zorder>gb_warnLine</zorder>
+   <zorder>gb_mainmenu</zorder>
+   <zorder>gb_exp</zorder>
+   <zorder>gb_monthExp</zorder>
+   <zorder>gb_yearExp</zorder>
+   <zorder>gb_todayExp</zorder>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
+ <tabstops>
+  <tabstop>txt_todayExp</tabstop>
+  <tabstop>txt_monthExp</tabstop>
+  <tabstop>txt_yearExp</tabstop>
+  <tabstop>txt_exp</tabstop>
+  <tabstop>btn_viewExp</tabstop>
+  <tabstop>btn_addCat</tabstop>
+  <tabstop>btn_addRecur</tabstop>
+  <tabstop>btn_addWarn</tabstop>
+  <tabstop>btn_addExp</tabstop>
+  <tabstop>lineEdit_8</tabstop>
+  <tabstop>listView_9</tabstop>
+  <tabstop>listView_10</tabstop>
+  <tabstop>lineEdit_9</tabstop>
+  <tabstop>listView_11</tabstop>
+  <tabstop>lineEdit_10</tabstop>
+  <tabstop>listView_12</tabstop>
+  <tabstop>lineEdit_11</tabstop>
+  <tabstop>listView_13</tabstop>
+  <tabstop>lineEdit_12</tabstop>
+  <tabstop>listView_14</tabstop>
+  <tabstop>lineEdit_13</tabstop>
+  <tabstop>listView_15</tabstop>
+  <tabstop>lineEdit_14</tabstop>
+  <tabstop>listView_16</tabstop>
+  <tabstop>lineEdit_7</tabstop>
+  <tabstop>listView_8</tabstop>
+  <tabstop>listView_6</tabstop>
+  <tabstop>lineEdit_5</tabstop>
+  <tabstop>listView_3</tabstop>
+  <tabstop>lineEdit_2</tabstop>
+  <tabstop>listView_7</tabstop>
+  <tabstop>lineEdit_6</tabstop>
+  <tabstop>listView_4</tabstop>
+  <tabstop>lineEdit_3</tabstop>
+  <tabstop>listView_5</tabstop>
+  <tabstop>lineEdit_4</tabstop>
+  <tabstop>listView_2</tabstop>
+  <tabstop>lineEdit</tabstop>
+  <tabstop>listView</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

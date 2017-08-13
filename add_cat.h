@@ -3,7 +3,7 @@
 
 #include <QDialog>
 #include <QString>
-#include "general.h"
+#include "common_general.h"
 
 namespace Ui {
 class add_cat;
@@ -24,7 +24,9 @@ private slots:
 
 private:
     Ui::add_cat *ui;
-    general *gen;
+    common_general *comGen;
+
+    bool preCheckUserInput(QString); //check user input
 };
 
 #endif // ADD_CAT_H

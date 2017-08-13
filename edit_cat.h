@@ -3,7 +3,7 @@
 
 #include <QDialog>
 #include <QString>
-#include "general.h"
+#include "common_general.h"
 
 namespace Ui {
 class edit_cat;
@@ -29,9 +29,9 @@ private:
     QString selectedId; //current selected record
 
     Ui::edit_cat *ui;
-    general *gen;
+    common_general *comGen;
 
-    void editCategory(QString, QString); //edit the record in category.txt
+    bool preCheckUserInput(QString); //check user input
 };
 
 #endif // EDIT_CAT_H
