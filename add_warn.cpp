@@ -12,10 +12,6 @@ add_warn::add_warn(QWidget *parent) :
     comGen->setFileName("warnline.txt");
 
     retrieveCategory(); //retrieve category from text file
-
-    //to show or hide day type listbox
-    QString warnType = ui->lst_warnType->currentText();
-    showHideDayType(warnType);
 }
 
 add_warn::~add_warn()
@@ -29,17 +25,11 @@ void add_warn::on_btn_confirm_clicked()
     QString warnName = ui->txt_name->text();
     QString warnPoint = ui->txt_point->text();
     QString warnType = ui->lst_warnType->currentText();
-    QString warnDayType = ui->lst_daytype->currentText();
     int warn_catId = ui->lst_cat->currentData().toInt();
     QString warnCatId = QString::number(warn_catId);
 
     //return empty if user didn't select a type
     warnType = comGen->listBoxIsEmpty(warnType);
-
-    //if user didn't select 'day' as the recurring type, then save recurDayType as empty
-    if(!comGen->DayTypeString(warnType)){
-        warnDayType = "";
-    }
 
     //check user input
     if(!(preCheckUserInput(warnName, warnPoint, warnType))){
@@ -48,7 +38,7 @@ void add_warn::on_btn_confirm_clicked()
 
     //data to save into new file
     QStringList passData;
-    passData << warnName << warnPoint << warnType << warnDayType << warnCatId;
+    passData << warnName << warnPoint << warnType << warnCatId;
 
     //write new record into file
     //-1 parameter here is to by editting function,
@@ -68,17 +58,6 @@ void add_warn::on_btn_confirm_clicked()
 void add_warn::on_btn_cancel_clicked()
 {
     this->close();
-}
-
-void add_warn::showHideDayType(QString warnType)
-{
-    if(warnType == "Day"){
-        ui->lst_daytype->show();
-    }
-    else{
-        ui->lst_daytype->setCurrentIndex(0);
-        ui->lst_daytype->hide();
-    }
 }
 
 void add_warn::retrieveCategory()
@@ -157,9 +136,4 @@ bool add_warn::preCheckUserInput(QString name, QString point, QString type)
             return true;
             break;
     }
-}
-
-void add_warn::on_lst_warnType_currentIndexChanged(const QString &arg1)
-{
-    showHideDayType(arg1);
 }

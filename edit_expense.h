@@ -5,6 +5,7 @@
 #include <QStringList>
 #include "common_general.h"
 #include "common_expenses.h"
+#include "spending_limit.h"
 
 namespace Ui {
 class edit_expense;
@@ -33,6 +34,7 @@ private:
     Ui::edit_expense *ui;
     common_general *comGen;
     common_expenses *comExp;
+    spending_limit *spendLimit;
 
     QString selectedId; //current selected record
 

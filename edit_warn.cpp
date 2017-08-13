@@ -13,10 +13,6 @@ edit_warn::edit_warn(QWidget *parent) :
     comGen->setTmpFileName("warnline_tmp.txt");
 
     retrieveCategory(); //retrieve category from text file
-
-    //to show or hide day type listbox
-    QString warnType = ui->lst_warnType->currentText();
-    showHideDayType(warnType);
 }
 
 edit_warn::~edit_warn()
@@ -42,14 +38,12 @@ void edit_warn::retrieveRecord(QString curId)
         QString warnName = currentRecord[1];
         QString warnPoint = currentRecord[2];
         QString warnType = currentRecord[3];
-        QString warnDayType = currentRecord[4];
-        QString warnCat = currentRecord[5];
+        QString warnCat = currentRecord[4];
         QString warnCatName = comGen->convertIdName("category.txt", warnCat);
 
         ui->txt_name->setText(warnName);
         ui->txt_point->setText(warnPoint);
         ui->lst_warnType->setCurrentText(warnType);
-        ui->lst_daytype->setCurrentText(warnDayType);
         ui->lst_cat->setCurrentText(warnCatName);
     }
 }
@@ -60,17 +54,11 @@ void edit_warn::on_btn_confirm_clicked()
     QString warnName = ui->txt_name->text();
     QString warnPoint = ui->txt_point->text();
     QString warnType = ui->lst_warnType->currentText();
-    QString warnDayType = ui->lst_daytype->currentText();
     int warn_catId = ui->lst_cat->currentData().toInt();
     QString warnCatId = QString::number(warn_catId);
 
     //return empty if user didn't select a type
     warnType = comGen->listBoxIsEmpty(warnType);
-
-    //if user didn't select 'day' as the recurring type, then save recurDayType as empty
-    if(!comGen->DayTypeString(warnType)){
-        warnDayType = "";
-    }
 
     if(!(preCheckUserInput(warnName, warnPoint, warnType))){
         return;
@@ -78,7 +66,7 @@ void edit_warn::on_btn_confirm_clicked()
 
     //data to save into new file
     QStringList passData;
-    passData << warnName << warnPoint << warnType << warnDayType << warnCatId;
+    passData << warnName << warnPoint << warnType << warnCatId;
 
     //write record into file
     if(comGen->writeNewRecord(passData, this->selectedId)){
@@ -95,17 +83,6 @@ void edit_warn::on_btn_confirm_clicked()
 void edit_warn::on_btn_cancel_clicked()
 {
     this->close();
-}
-
-void edit_warn::showHideDayType(QString warnType)
-{
-    if(warnType == "Day"){
-        ui->lst_daytype->show();
-    }
-    else{
-        ui->lst_daytype->setCurrentIndex(0);
-        ui->lst_daytype->hide();
-    }
 }
 
 void edit_warn::retrieveCategory()
@@ -185,9 +162,4 @@ bool edit_warn::preCheckUserInput(QString warnName, QString warnPoint, QString w
         return true;
         break;
     }
-}
-
-void edit_warn::on_lst_warnType_currentIndexChanged(const QString &arg1)
-{
-    showHideDayType(arg1);
 }

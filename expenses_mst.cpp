@@ -101,6 +101,8 @@ void expenses_mst::retrieveExpensesList()
     QString expDate;
     QString expTime;
 
+    double total = 0;
+
     for(int i=0; i<recordsList.size(); i++){
         expRecord = recordsList[i].split("|||||");
         expId = expRecord[0];
@@ -110,8 +112,12 @@ void expenses_mst::retrieveExpensesList()
         expDate = expRecord[5];
         expTime = expRecord[6];
 
+        total += expAmt.toDouble();
+
         showListing(expId, expName, expAmt, expCat, expDate, expTime);
     }
+
+    ui->txt_total->setText(QString::number(total,'f', 2));
 }
 
 QStringList expenses_mst::retrieveRecords()

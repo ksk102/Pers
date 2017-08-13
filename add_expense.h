@@ -4,6 +4,7 @@
 #include <QDialog>
 #include "common_general.h"
 #include "common_expenses.h"
+#include "spending_limit.h"
 
 namespace Ui {
 class add_expense;
@@ -30,7 +31,7 @@ private:
     Ui::add_expense *ui;
     common_general *comGen;
     common_expenses *comExp;
-
+    spending_limit *spendLimit;
 
     void retrieveCategory(); //retrieve category from text file
     void initialDateSelection(); //get the date selection in dropdown list

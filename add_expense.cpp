@@ -25,6 +25,7 @@ add_expense::~add_expense()
     delete ui;
     delete comGen;
     delete comExp;
+    delete spendLimit;
 }
 
 void add_expense::retrieveCategory()
@@ -222,6 +223,15 @@ void add_expense::on_btn_confirm_clicked()
     //so use -1 to indicate it is not from edit
     if(comGen->writeNewRecord(passData, "-1")){
         QMessageBox::information(this,"Sucessful","\""+name+"\" has been sucessfully added into system.");
+
+        //warnline function
+        spendLimit = new spending_limit(catIdS, date);
+        QStringList overspendList = spendLimit->checkWarnLine();
+
+        foreach(QString data, overspendList){
+            QMessageBox::warning(this,"Warning", data);
+        }
+
         this->close();
     }
     else{

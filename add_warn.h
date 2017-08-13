@@ -22,14 +22,11 @@ private slots:
 
     void on_btn_cancel_clicked();
 
-    void on_lst_warnType_currentIndexChanged(const QString &arg1);
-
 private:
     Ui::add_warn *ui;
     common_general *comGen;
     common_warn *comWarn;
 
-    void showHideDayType(QString); //to show or hide day type listbox
     void retrieveCategory(); //retrieve category from text file
     bool preCheckUserInput(QString, QString, QString); //check user input
 };

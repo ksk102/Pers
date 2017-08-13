@@ -47,7 +47,7 @@ private:
     void setColumnInfo();
     void retrieveWarningList(); //retrieve records from file
     QStringList retrieveRecords(); //retrieve listing from file
-    void showListing(QString, QString, QString, QString, QString, QString); //show listing on the treewidget
+    void showListing(QString, QString, QString, QString, QString); //show listing on the treewidget
 
 
 

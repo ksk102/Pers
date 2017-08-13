@@ -45,7 +45,8 @@ SOURCES += \
     common_expenses.cpp \
     expenses_mst.cpp \
     edit_expense.cpp \
-    recurring_expenses.cpp
+    recurring_expenses.cpp \
+    spending_limit.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -65,7 +66,8 @@ HEADERS += \
     common_expenses.h \
     expenses_mst.h \
     edit_expense.h \
-    recurring_expenses.h
+    recurring_expenses.h \
+    spending_limit.h
 
 FORMS += \
         mainwindow.ui \

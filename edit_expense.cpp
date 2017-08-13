@@ -26,6 +26,7 @@ edit_expense::~edit_expense()
     delete ui;
     delete comGen;
     delete comExp;
+    delete spendLimit;
 }
 
 void edit_expense::retrieveRecord(QString curId)
@@ -297,6 +298,15 @@ void edit_expense::on_btn_confirm_clicked()
     //write new record into file
     if(comGen->writeNewRecord(passData, this->selectedId)){
         QMessageBox::information(this,"Sucessful","\""+name+"\" has been sucessfully added into system.");
+
+        //warnline function
+        spendLimit = new spending_limit(catIdS, date);
+        QStringList overspendList = spendLimit->checkWarnLine();
+
+        foreach(QString data, overspendList){
+            QMessageBox::warning(this,"Warning", data);
+        }
+
         this->close();
     }
     else{

@@ -40,7 +40,7 @@ void warnLine_mst::on_btn_add_clicked()
     retrieveWarningList(); //show the listing
 }
 
-void warnLine_mst::showListing(QString warnId, QString warnName, QString warnPoint, QString warnType, QString warnDayType, QString warnCat)
+void warnLine_mst::showListing(QString warnId, QString warnName, QString warnPoint, QString warnType, QString warnCat)
 {
     QString warnCatName = "";
 
@@ -55,8 +55,7 @@ void warnLine_mst::showListing(QString warnId, QString warnName, QString warnPoi
     itm->setText(1, warnName); //column, data
     itm->setText(2, warnPoint); //column, data
     itm->setText(3, warnType); //column, data
-    itm->setText(4, warnDayType); //column, data
-    itm->setText(5, warnCatName); //column, data
+    itm->setText(4, warnCatName); //column, data
 }
 
 void warnLine_mst::retrieveWarningList()
@@ -70,7 +69,6 @@ void warnLine_mst::retrieveWarningList()
     QString warnName;
     QString warnPoint;
     QString warnType;
-    QString warnDayType;
     QString warnCat;
 
     for(int i=0; i<recordsList.size(); i++){
@@ -79,10 +77,9 @@ void warnLine_mst::retrieveWarningList()
         warnName = warnRecord[1];
         warnPoint = warnRecord[2];
         warnType = warnRecord[3];
-        warnDayType = warnRecord[4];
-        warnCat = warnRecord[5];
+        warnCat = warnRecord[4];
 
-        showListing(warnId, warnName, warnPoint, warnType, warnDayType, warnCat);
+        showListing(warnId, warnName, warnPoint, warnType, warnCat);
     }
 }
 
@@ -158,15 +155,14 @@ void warnLine_mst::setSearchString()
 
 void warnLine_mst::setColumnInfo()
 {
-    ui->tw_warnList->setColumnCount(6); //set the listing column number
-    ui->tw_warnList->setHeaderLabels(QStringList() << "Warning ID" << "Warning Name" << "Warning Point (RM)" << "Warning Type" << "Warning Day Type" << "Category"); //set the columns header name
+    ui->tw_warnList->setColumnCount(5); //set the listing column number
+    ui->tw_warnList->setHeaderLabels(QStringList() << "Warning ID" << "Warning Name" << "Warning Point (RM)" << "Warning Type" << "Category"); //set the columns header name
 
     ui->tw_warnList->setColumnWidth(0, 70);
-    ui->tw_warnList->setColumnWidth(1, 270);
+    ui->tw_warnList->setColumnWidth(1, 390);
     ui->tw_warnList->setColumnWidth(2, 120);
     ui->tw_warnList->setColumnWidth(3, 90);
-    ui->tw_warnList->setColumnWidth(4, 120);
-    ui->tw_warnList->setColumnWidth(5, 100);
+    ui->tw_warnList->setColumnWidth(4, 100);
 }
 
 void warnLine_mst::on_btn_search_clicked()
@@ -192,7 +188,6 @@ QStringList warnLine_mst::retrieveRecords()
     QString recordName;
     double recordPoint;
     QString recordType;
-    QString recordDayType;
     QString recordCat;
     QStringList lineData;
     QStringList linesList;
@@ -215,8 +210,7 @@ QStringList warnLine_mst::retrieveRecords()
        recordName = lineData[1];
        recordPoint = lineData[2].toDouble();
        recordType = lineData[3];
-       recordDayType = lineData[4];
-       recordCat = lineData[5];
+       recordCat = lineData[4];
 
        if((warnName == "" || recordName.contains(warnName, Qt::CaseInsensitive))
            && (warnPointFrom == 0 || warnPointFrom <= recordPoint)
