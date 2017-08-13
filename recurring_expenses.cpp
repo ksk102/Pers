@@ -55,8 +55,12 @@ void recurring_expenses::addRecurringExpenses()
         //add daily recurring expenses
         addDailyRecurExpenses(lastday, lastmonth, lastyear, todayday, todaymonth, todayyear);
 
-        if(isFirstTimeinMonth()){
+        if(isFirstTimeinMonth()){ //first time login in the month
             addMonthlyRecurExpenses(lastmonth, lastyear, todaymonth, todayyear);
+
+            if(isFirstTimeinYear()){ //first time login in the year
+                addYearlyRecurExpenses(lastyear, todayyear);
+            }
         }
     }
 }
@@ -84,6 +88,23 @@ bool recurring_expenses::isFirstTimeinMonth()
 
     QDate today = QDate::currentDate();
     QString todayS = today.toString("yyyyMM");
+
+    if(lastdateS != todayS){
+        return true;
+    }
+    else{
+        return false;
+    }
+}
+
+bool recurring_expenses::isFirstTimeinYear()
+{
+    QString lastdate = getlastDate(); //get last login date
+    QDate lastdateD = QDate::fromString(lastdate, "yyyyMMdd");
+    QString lastdateS = lastdateD.toString("yyyy");
+
+    QDate today = QDate::currentDate();
+    QString todayS = today.toString("yyyy");
 
     if(lastdateS != todayS){
         return true;
@@ -357,4 +378,38 @@ void recurring_expenses::addMonthlyRecurExpensesSubMonth(QString recurName, QStr
 
     //write new record into file
     comGen->writeIntoFile(passData, "expenses.txt");
+}
+
+void recurring_expenses::addYearlyRecurExpenses(int lastyear, int todayyear)
+{
+    QStringList recordsList = retrieveRecurExpenses("Yearly");
+
+    //get each recurring expenses' data
+    for(int i=0; i<recordsList.size(); i++){
+        QStringList recurRecord = recordsList[i].split("|||||");
+        QString recurName = recurRecord[1];
+        QString recurAmt = recurRecord[2];
+        QString recurCat = recurRecord[3];
+
+        //loop from last login year till this year
+        for(int y=lastyear+1;y<=todayyear;y++){
+
+            //regenerate date format
+            QString runningday = "01";
+            QString runningMonth = "01";
+            QString runningdate = QString::number(y) + runningMonth + runningday;
+
+            QDate runningdateD = QDate::fromString(runningdate,"yyyyMMdd");
+            QString runningdateEng = runningdateD.toString("yyyy");
+
+            QStringList passData;
+
+            //data to write into file
+            passData << recurName + " @ " +  runningdateEng << recurAmt << recurCat << "" << runningdate << "1200AM";
+
+            //write new record into file
+            comGen->writeIntoFile(passData, "expenses.txt");
+
+        }
+    }
 }

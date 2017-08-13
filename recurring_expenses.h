@@ -20,6 +20,7 @@ private:
     void addRecurringExpenses(); // check and add recurring expenses into system
     bool isFirstTimeToday(); //compare today's date with last login date
     bool isFirstTimeinMonth(); //compare current month with last login date's month
+    bool isFirstTimeinYear(); //compare current year with last login date's year
     QString getlastDate(); //get last login date from file
     QStringList lastLoginDate(); //get last login date
     QStringList todayDate(); //get today's date
@@ -30,6 +31,7 @@ private:
     void identifyDayinMonth(int, QString); //identify the day in a month
     void addMonthlyRecurExpenses(int, int, int, int); //add monthly recurring expenses
     void addMonthlyRecurExpensesSubMonth(QString, QString, QString, int, int); //sub function for addMonthlyRecurExpenses
+    void addYearlyRecurExpenses(int, int); //add yearly recurring expenses
 };
 
 #endif // RECURRING_EXPENSES_H
