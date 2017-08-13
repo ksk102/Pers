@@ -122,6 +122,12 @@ QString recurring_expenses::getlastDate()
     QFile file(comGen->getFileName());
     file.open(QFile::ReadOnly | QFile::Text);
 
+    if(!file.exists()){
+        QDate today = QDate::currentDate();
+        QString todayS = today.toString("yyyyMMdd");
+        return todayS;
+    }
+
     QTextStream in(&file);
     in >> date;
 

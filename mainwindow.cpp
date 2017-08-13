@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <QDate>
+#include <QFile>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -28,6 +29,8 @@ void MainWindow::on_btn_addCat_clicked()
     //categoryMst->show();
     categoryMst->setModal(true);
     categoryMst->exec();
+    showTodayExpenses();
+    showExceedWarning();
 }
 
 void MainWindow::on_btn_addWarn_clicked()
@@ -91,6 +94,24 @@ QString MainWindow::getTodayYear()
 
 void MainWindow::showTodayExpenses()
 {
+    QFile file("category.txt");
+    if(!file.exists()){
+        ui->gb_exp->hide();
+        ui->gb_todayExp->hide();
+        ui->gb_monthExp->hide();
+        ui->gb_yearExp->hide();
+        ui->gb_warnLine->hide();
+        file.close();
+        return;
+    }
+    else{
+        ui->gb_exp->show();
+        ui->gb_todayExp->show();
+        ui->gb_monthExp->show();
+        ui->gb_yearExp->show();
+        ui->gb_warnLine->show();
+    }
+
     ui->lw_todayExp->clear();
     ui->lw_monthExp->clear();
     ui->lw_yearExp->clear();
