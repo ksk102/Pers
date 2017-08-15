@@ -117,6 +117,11 @@ void MainWindow::showTodayExpenses()
     ui->lw_yearExp->clear();
     ui->lw_exp->clear();
 
+    ui->txt_todayExp->clear();
+    ui->txt_monthExp->clear();
+    ui->txt_yearExp->clear();
+    ui->txt_exp->clear();
+
     //get categories to show in mainwindows
     QStringList catList = comGen->retrieveRecords("category.txt", "");
     QStringList catRecord;
