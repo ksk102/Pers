@@ -25,12 +25,12 @@ QString common_general::getTmpFileName()
     return this->fileNameTmp;
 }
 
-bool common_general::writeNewRecord(QStringList userInput, QString curId)
+bool common_general::writeNewRecord(QStringList userInput, QString curId, bool checkDuplicate)
 {
     QString recordName = userInput[0];
 
     //check if the name already exists, doesn't exists if return true
-    if(checkNameExist(recordName,curId)){
+    if(checkNameExist(recordName,curId) || !checkDuplicate){
 
         if(curId == "-1"){
             writeIntoFile(userInput, "");
