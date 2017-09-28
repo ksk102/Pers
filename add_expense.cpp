@@ -221,7 +221,7 @@ void add_expense::on_btn_confirm_clicked()
     //-1 parameter here is to by editting function,
     //since this is add new,
     //so use -1 to indicate it is not from edit
-    if(comGen->writeNewRecord(passData, "-1")){
+    if(comGen->writeNewRecord(passData, "-1", false)){
         QMessageBox::information(this,"Sucessful","\""+name+"\" has been sucessfully added into system.");
 
         //warnline function

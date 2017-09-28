@@ -14,7 +14,7 @@ public:
     void setTmpFileName(QString);
     QString getTmpFileName();
 
-    bool writeNewRecord(QStringList, QString); //write new record into file
+    bool writeNewRecord(QStringList, QString, bool = true); //write new record into file
     bool checkNameExist(QString, QString); //check if name already exists
     void writeIntoFile(QStringList userInput, QString); //write user input data into file
     int generateNewId(QString); //generate new id to add into file

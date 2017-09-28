@@ -296,7 +296,7 @@ void edit_expense::on_btn_confirm_clicked()
     passData << name << amt << catIdS << other << date << time;
 
     //write new record into file
-    if(comGen->writeNewRecord(passData, this->selectedId)){
+    if(comGen->writeNewRecord(passData, this->selectedId, false)){
         QMessageBox::information(this,"Sucessful","\""+name+"\" has been sucessfully added into system.");
 
         //warnline function
